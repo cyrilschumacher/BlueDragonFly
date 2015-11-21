@@ -64,7 +64,7 @@ class MailRequestModel {
      * @param {Request}   request   The HTTP request.
      */
     public constructor(request: express.Request) {
-        this.captcha = request.body["g-recaptcha"];
+        this.captcha = request.body["g-recaptcha-response"];
         this.emailAddress = request.body.emailAddress;
         this.message = request.body.message;
         this.name = request.body.name;

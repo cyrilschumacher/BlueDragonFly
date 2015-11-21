@@ -48,7 +48,7 @@ class MailController {
         const i18n = request["i18n"];
 
         // Captcha.
-        request.checkBody("g-recaptcha", i18n.t("assert.mail.captcha.isEmpty")).notEmpty();
+        request.checkBody("g-recaptcha-response", i18n.t("assert.mail.captcha.isEmpty")).notEmpty();
 
         // Complete name.
         request.checkBody("name", i18n.t("assert.mail.name.invalidLength")).optional().len(0, 70);

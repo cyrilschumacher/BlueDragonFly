@@ -48,7 +48,7 @@ function exec_typescript(cb) {
  */
 function exec_server() {
     // Start the server at the beginning of the task.
-    server.run(['dist/app.js']);
+    server.run(['--harmony', 'dist/app.js']);
 
     // Restart the server when file changes
     gulp.watch(['src/**/*.ts', '!src/typing/**/*.ts'], exec_typescript);
