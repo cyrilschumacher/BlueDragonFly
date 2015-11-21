@@ -1,0 +1,13 @@
+html
+    body
+        .wrapper
+            .l-header
+                img(src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABcCAMAAACvFeCmAAAAqFBMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8j1z1tAAAAN3RSTlMA+Cf8bZIG5uG58++rMhzYy0kWDQLPppYJxWZYRaGCeWBc2r2HcVM5EOp/PjYuJA+vjlAE1bWdwqWotgAAAq1JREFUaN612olS4kAUBdCblUDCEiIQguyyjAgCLu///2yMU4xKGzqd131+oKusW+/WjcC0/ZHqMGvTt4gcGHQXLykXwJh03qN/BjBku1rQRQwjWpMa/RckMMAeNOibd+i3iSz6YQ0BP1BX/nShOVAdEkR6A+Uu6Bcz7YESNVraAyWqQ5OnyKIirqZA1amYZYMvHXXolqH+QImm+gMlanIDFZJU744VqLzy5B4YgbqvUzkbVORfAiXX9lHJs9um0jxU0X2skYJ7qLO9kFQECTtQcmP1QDmkam0gUGLxsgMlF+kOFKt4D6UCxSreZqlAsYo3DxSDqytQrOJN3DYxDfmBkpvKA8W3lwaKr3cjUG8OyXGK118PSY5VvEnGDJS8eLtTtUAFoXLxHk6KgYqWqsXbHCsGquGOFYt3pxyo16anWLx9UjX2PdXibZAaK8NAuXhngeKfCl6F4n1eKTwzTuBVK97ELflMIwNOlYs3zRYk19sDD5ziTWevJPGeAhNm8frzHt0QzgE88ov3ZV1c6x0bwFRL8d6dhwX3LhXe4CzeeEmCcIQPK/rCXrz3188MD/jgkoC1eHdv9M3ps38ybvGKNkfncobOUHuDdiitGX0+szwgN1Mo3hQK9n2HHl6QmzvmFq+9x6eRSq3FqCR22ItX7shfvHIRf/HKDfiLV27CX7xyK/7ilZtTaWELFcX8xSu34S9eOdthL165VoO9eOWea+zFK+cv6FrN0v6puSM0bPfp6Gj+1Fynn2q2sMWF4uVeSGsn/GdGKF72hRx95e4UiotXy4VcFX2G8cDh3urw7SoQFi/3QkZigtKsLRQv60IOk8IvcAOwPNHFolW0CM7uFjn+hQybkGFfSCuGDP9CZjDopU25CYzqKPxCgHUh6z7M6hP1tjDsTIGN6v4C44BBuQWzhPIAAAAASUVORK5CYII=")
+                h1.title You have a new message!
+                span.subtitle This message is from #{name ? name : 'Unknown'} &lt;#{emailAddress}&gt;
+            .l-section
+                .l-article
+                    h2 #{subject}
+                    p #{message}
+        .l-footer
+            p Copyright © 2015 #[a(href="http://www.cyrilschumacher.fr/") Cyril Schumacher]

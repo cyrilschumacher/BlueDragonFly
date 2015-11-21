@@ -1,0 +1,47 @@
+html {
+    body {
+        background: #E5E5E5;
+        color: #212121;
+        font: normal 14px "Roboto", Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+
+        a {
+            text-decoration: none;
+            color: #2196F3;
+        }
+
+        .wrapper {
+            background: #fff;
+            border: 1px solid #CCC;
+            margin: 1%;
+
+            .l-header {
+                background: #2196F3;
+                color: #FFFFFF;
+                padding: 5% 0;
+                text-align: center;
+
+                .title {
+                    font-size: xx-large;
+                }
+
+                .subtitle {
+                    display: block;
+                    font-weight: lighter;
+                    margin-top: -20px;
+                }
+            }
+
+            .l-section {
+                padding: 2.5% 5%;
+            }
+        }
+
+        .l-footer {
+            color: #727272;
+            text-transform: uppercase;
+            text-align: center;
+        }
+    }
+}

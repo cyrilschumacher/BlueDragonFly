@@ -1,0 +1,23 @@
+{
+    "assert": {
+        "mail": {
+            "captcha": {
+                "isEmpty": "The captcha response is empty."
+            },
+            "name": {
+                "invalidLength": "The name must have 70 characters maximum."
+            },
+            "emailAddress": {
+                "notValid": "The e-mail address is not valid."
+            },
+            "subject": {
+                "isEmpty": "The subject is empty.",
+                "invalidLength": "The subject must have 3 to 255 characters required."
+            },
+            "message": {
+                "isEmpty": "The message is empty.",
+                "invalidLength": "The message must have 3 to 500 characters required."
+            }
+        }
+    }
+}

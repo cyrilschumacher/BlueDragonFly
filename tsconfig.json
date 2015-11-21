@@ -1,0 +1,40 @@
+{
+    "compileOnSave": false,
+    "compilerOptions": {
+        "target": "ES5",
+        "module": "commonjs",
+        "noImplicitAny": true,
+        "removeComments": true,
+        "preserveConstEnums": true
+    },
+    "filesGlob": [
+        "./src/**/*.ts",
+        "!node_modules/**/*.ts"
+    ],
+    "files": [
+        "./src/app.ts",
+        "./src/configuration/bunyan.ts",
+        "./src/configuration/environment.ts",
+        "./src/configuration/i18next.ts",
+        "./src/configuration/route.ts",
+        "./src/configuration/startup.ts",
+        "./src/controller/index.ts",
+        "./src/controller/mail.ts",
+        "./src/model/request/mail.ts",
+        "./src/model/response/base.ts",
+        "./src/model/response/error.ts",
+        "./src/model/response/mail.ts",
+        "./src/service/htmlMailSender.ts",
+        "./src/service/mailSender.ts",
+        "./src/service/reCaptcha.ts",
+        "./src/settings.ts",
+        "./src/typing/email-templates/email-templates-tests.ts",
+        "./src/typing/email-templates/email-templates.d.ts",
+        "./src/typing/helmet/helmet-tests.ts",
+        "./src/typing/helmet/helmet.d.ts"
+    ],
+    "exclude": [],
+    "atom": {
+        "rewriteTsconfig": true
+    }
+}
