@@ -22,7 +22,7 @@
  */
 
 /// <reference path="../typings/body-parser/body-parser.d.ts"/>
-/// <reference path="typing/helmet/helmet.d.ts"/>
+/// <reference path="../typings/helmet/helmet.d.ts"/>
 /// <reference path="../typings/node/node.d.ts"/>
 /// <reference path="../typings/express/express.d.ts"/>
 /// <reference path="../typings/express-validator/express-validator.d.ts"/>
