@@ -34,7 +34,7 @@ class IndexController {
      * @param response  The HTTP response.
      */
     public default(request: express.Request, response: express.Response): void {
-        response.render("index");
+        response.end();
     };
 
     /**
@@ -43,7 +43,7 @@ class IndexController {
      * @param response  The HTTP response.
      */
     public notFound(request: express.Request, response: express.Response): void {
-        response.send({ error: "Not found" });
+        response.status(404).send({ error: "Not found" });
     };
 }
 

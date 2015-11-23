@@ -10,3 +10,5 @@ install:
   - tsd install
 before_script: gulp
 script: npm run-script test
+after_success:
+  - coveralls

@@ -38,5 +38,5 @@ export function initialize(app: express.Express) {
     logger.info("Initializes localization.");
 
     i18next.init(settings.i18next);
-    app.use(i18next.handle);
+    app.use(i18next["handle"]);
 }

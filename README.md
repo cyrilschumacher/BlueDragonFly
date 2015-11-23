@@ -4,6 +4,7 @@
 [![Build Status](https://travis-ci.org/cyrilschumacher/BlueDragonFly.svg)](https://travis-ci.org/cyrilschumacher/BlueDragonFly)
 [![MIT License][license-image]][license-url]
 [![typescript-standard-style][standard-image]][standard-url]
+[![Coveralls Status][coveralls-image]][coveralls-url]
 
 The Back-End part for [www.cyrilschumacher.fr](http://www.cyrilschumacher.fr/).
 
@@ -56,5 +57,9 @@ gulp
 
 [license-image]: http://img.shields.io/badge/license-MIT-blue.svg?style=flat
 [license-url]: LICENSE
+
 [standard-image]: https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat
 [standard-url]: https://github.com/Microsoft/TypeScript/wiki/Coding-guidelines
+
+[coveralls-url]: https://coveralls.io/github/cyrilschumacher/BlueDragonFly
+[coveralls-image]: https://coveralls.io/repos/cyrilschumacher/BlueDragonFly/badge.svg

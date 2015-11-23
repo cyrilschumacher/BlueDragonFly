@@ -55,4 +55,4 @@ route.initialize(app);
 
 // Initializes startup.
 import startup = require("./configuration/startup");
-startup.initialize(app);
+export = startup.initialize(app);

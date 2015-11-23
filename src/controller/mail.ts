@@ -74,6 +74,7 @@ class MailController {
      */
     public send = (request: express.Request, response: express.Response): void => {
         var errors = this._assertMailInformation(request, response);
+        logger.info("Errors=" + JSON.stringify(errors));
         if (!errors) {
             var model = new MailModel(request);
             var reCaptchaSevice = new ReCaptchaSevice();

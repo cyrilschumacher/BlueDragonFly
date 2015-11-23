@@ -26,7 +26,7 @@
 import EmailTemplates = require("email-templates");
 import MailSenderService = require("./mailSender");
 
-var EmailTemplate = EmailTemplates.EmailTemplate
+var EmailTemplate = EmailTemplates.EmailTemplate;
 
 /**
  * @summary Service for send a HTML mail.

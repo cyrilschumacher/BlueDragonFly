@@ -31,7 +31,7 @@ var settings = require("../settings");
  * @param {Express} app The express application.
  */
 export function initialize(app: express.Express) {
-    app.listen(settings.express.listen, () => {
+    return app.listen(settings.express.listen, () => {
         logger.info("Started Express server listening on port %d in %s mode.", settings.express.listen, app.settings.env);
     });
 }
