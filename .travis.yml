@@ -2,6 +2,7 @@ language: node_js
 node_js:
   - "4.1"
 before_install:
+  - npm install -g coveralls
   - npm install -g gulp
   - npm install -g karma-cli
   - npm install -g tsd
@@ -9,6 +10,6 @@ install:
   - npm install
   - tsd install
 before_script: gulp
-script: npm run-script test
+script: npm run-script testscript:
 after_success:
   - coveralls
