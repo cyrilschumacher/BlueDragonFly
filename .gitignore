@@ -94,3 +94,6 @@ dist/
 typings/
 .tscache
 .baseDir.ts
+
+### Coveralls ###
+coverage/
