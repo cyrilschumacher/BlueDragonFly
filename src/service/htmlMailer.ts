@@ -21,36 +21,34 @@
  * SOFTWARE.
  */
 
+///<reference path="../typing/email-templates/email-templates.d.ts"/>
 ///<reference path="../../typings/nodemailer/nodemailer.d.ts"/>
 
+import EmailTemplates = require("email-templates");
 import nodemailer = require("nodemailer");
-import smtpTransport = require("nodemailer-smtp-transport");
 
 var settings = require("../settings");
 
 /**
- * @summary Service for send a mail.
+ * @summary Service for send a HTML mail.
  * @class
  */
-class MailSenderService {
+class HtmlMailerService {
     /**
-     * @summary Transport.
-     * @private
-     * @type {Transport}
+     * @summary Email template.
+     * @type {EmailTemplate}
      */
-    private _transport: nodemailer.Transporter;
+    private _emailTemplate: EmailTemplates.EmailTemplate;
 
     /**
      * @summary Constructor.
-     * @constructor
+     * @param (Transporter) _transporter        The transporter.
+     * @param (string)      _from               The recipient.
+     * @param (string)      templateDirectory   The template directory.
      */
-    public constructor() {
-        const options = {
-            ignoreTLS: true,
-            port: settings.smtp.port
-        };
-
-        this._transport = nodemailer.createTransport(options);
+    public constructor(private _transporter: nodemailer.Transporter, private _from: string, templateDirectory: string) {
+        const EmailTemplate = EmailTemplates.EmailTemplate;
+        this._emailTemplate = new EmailTemplate(templateDirectory);
     }
 
     /**
@@ -63,7 +61,7 @@ class MailSenderService {
      */
     private _createMailOptions = (to: string, subject: string, text: string, html?: string): nodemailer.SendMailOptions => {
         return {
-            from: settings.smtp.auth.user,
+            from: this._from,
             to: to,
             subject: subject,
             html: html,
@@ -71,19 +69,19 @@ class MailSenderService {
         };
     };
 
-    /**
-     * @summary Sends a e-mail.
-     * @param {string}      to       The recipient.
-     * @param {string}      subject  The subject.
-     * @param {string}      text     The text message.
-     * @param {Function}    html     The HTML message.
-     * @param {Function}    callback The callback.
-     */
-    public send = (to: string, subject: string, text: string, callback: (error: any) => void, html?: string): void => {
-        // Creates mail options and sends mail with defined transport object.
-        const mailOptions = this._createMailOptions(to, subject, text, html);
-        this._transport.sendMail(mailOptions, callback);
+    public send = (to: string, subject: string, data: Object, callback: (error: any) => void): void => {
+        this._emailTemplate.render(data, (error: any, results: any) => {
+            if (!error) {
+                const text = results.text || "";
+                const html = results.html || "";
+                const options = this._createMailOptions(to, subject, text, html);
+
+                this._transporter.sendMail(options, callback);
+            } else {
+                callback(error);
+            }
+        });
     };
 }
 
-export = MailSenderService;
+export = HtmlMailerService;

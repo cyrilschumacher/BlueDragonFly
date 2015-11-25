@@ -1,12 +1,16 @@
+// Dependencies.
+var app = require('../../dist/app');
 var request = require('supertest');
 var assert = require('chai').assert;
-var app = require('../../dist/app');
-
-afterEach(function() {
-    app.close();
-});
 
 describe('IndexController', function() {
+    /**
+     * @summary Runs after all tests.
+     */
+    afterEach(function() {
+        app.close();
+    });
+
     it('should return a default page', function(done) {
         request(app)
             .get('/')

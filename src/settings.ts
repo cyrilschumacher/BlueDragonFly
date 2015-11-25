@@ -3,17 +3,21 @@ module.exports = {
         name: "Blue DragonFly",
         streams: [
             {
-                level: 'info',
+                level: "info",
                 stream: process.stdout
             },
             {
-                level: 'error',
+                level: "error",
                 stream: process.stdout
             }
         ]
     },
     express: {
         listen: 3000
+    },
+    mail: {
+        templateDir: "dist/resource/template/mail/",
+        from: "admin@test.com"
     },
     i18next: {
         dynamicLoad: true,
@@ -24,9 +28,7 @@ module.exports = {
         secret: ""
     },
     smtp: {
-        port: 1025,
-        auth: {
-            user: "admin@test.com"
-        }
+        ignoreTLS: true,
+        port: 1025
     }
 };

@@ -21,33 +21,9 @@
  * SOFTWARE.
  */
 
-///<reference path="../typing/email-templates/email-templates.d.ts"/>
+///<reference path="../../typings/nodemailer/nodemailer.d.ts"/>
 
-import EmailTemplates = require("email-templates");
-import MailSenderService = require("./mailSender");
+import nodemailer = require("nodemailer");
 
-var EmailTemplate = EmailTemplates.EmailTemplate;
-
-/**
- * @summary Service for send a HTML mail.
- * @class
- */
-class HtmlMailSenderService {
-    private _emailTemplate: EmailTemplates.EmailTemplate;
-
-    /**
-     * @summary Constructor.
-     * @param (string) templateDirectory The template directory.
-     */
-    public constructor(private _mailSender: MailSenderService, templateDirectory: string) {
-        this._emailTemplate = new EmailTemplate(templateDirectory);
-    }
-
-    public send = (to: string, subject: string, data: Object, callback: (error: any) => void): void => {
-        this._emailTemplate.render(data, (error: any, results: any) => {
-            this._mailSender.send(to, subject, results["text"], callback, results["html"]);
-        });
-    };
-}
-
-export = HtmlMailSenderService;
+const settings = require("../settings");
+export = nodemailer.createTransport(settings.smtp);

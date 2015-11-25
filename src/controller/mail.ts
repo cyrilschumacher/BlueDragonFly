@@ -26,11 +26,13 @@
 import express = require("express");
 import logger = require("../configuration/bunyan");
 import util = require("util");
+import transport = require("../configuration/transport");
 
-import MailSenderService = require("../service/mailSender");
-import HtmlMailSenderService = require("../service/htmlMailSender");
 import MailModel = require("../model/request/mail");
-import ReCaptchaSevice = require("../service/reCaptcha");
+import HtmlMailerService = require("../service/htmlMailer");
+import ReCaptchaService = require("../service/reCaptcha");
+
+var settings = require("../settings");
 
 /**
  * @summary Controller for mail.
@@ -38,13 +40,32 @@ import ReCaptchaSevice = require("../service/reCaptcha");
  */
 class MailController {
     /**
+     * @summary HTML mailer service.
+     * @type {HtmlMailerService}
+     */
+    private _htmlMailerService: HtmlMailerService;
+
+    /**
+     * @summary ReCaptcha service.
+     * @type {ReCaptchaService}
+     */
+    private _reCaptchaService: ReCaptchaService;
+
+    /**
+     * @summary Constructor.
+     */
+    public constructor() {
+        this._htmlMailerService = new HtmlMailerService(transport, settings.mail.from, settings.mail.templateDir);
+        this._reCaptchaService = new ReCaptchaService();
+    }
+
+    /**
      * @summary Asserts that the mail information is valid.
      * @private
      * @param   {Request}   request   The HTTP request.
-     * @param   {Response}  response  The HTTP response.
      * @return  {any}                 The errors encountered.
      */
-    private _assertMailInformation = (request: express.Request, response: express.Response): any => {
+    private _assertMailInformation = (request: express.Request): any => {
         const i18n = request["i18n"];
 
         // Captcha.
@@ -73,23 +94,17 @@ class MailController {
      * @param {Response}  response  The HTTP response.
      */
     public send = (request: express.Request, response: express.Response): void => {
-        var errors = this._assertMailInformation(request, response);
-        logger.info("Errors=" + JSON.stringify(errors));
+        var errors = this._assertMailInformation(request);
         if (!errors) {
             var model = new MailModel(request);
-            var reCaptchaSevice = new ReCaptchaSevice();
-
-            reCaptchaSevice.verify(model.captcha, (success: boolean) => {
+            this._reCaptchaService.verify(model.captcha, (success: boolean) => {
                 if (success) {
-                    var mailSender = new MailSenderService();
-                    var htmlMailSender = new HtmlMailSenderService(mailSender, "dist/resource/template/mail/");
-
-                    htmlMailSender.send(model.emailAddress, model.subject, model, (errors: any) => {
+                    this._htmlMailerService.send(model.emailAddress, model.subject, model, (errors: any) => {
                         if (!errors) {
                             response.end();
                         } else {
                             logger.error(errors);
-                            response.end(util.inspect(errors));
+                            response.status(500).end(util.inspect(errors));
                         }
                     });
                 } else {
