@@ -3,7 +3,6 @@
 /* Dependencies */
 var app = require('../../dist/app');
 var request = require('supertest');
-var assert = require('chai').assert;
 
 describe('IndexController', function() {
     /**
@@ -22,13 +21,7 @@ describe('IndexController', function() {
     it('should return not found error', function(done) {
         request(app)
             .get('/not/exists')
-            .expect(404, function(err, res) {
-                if (err) {
-                    throw err;
-                }
-
-                assert.typeOf(res.body, 'Object');
-                done();
-            });
+            .expect('Content-Type', /json/)
+            .expect(404, done);
     });
 });

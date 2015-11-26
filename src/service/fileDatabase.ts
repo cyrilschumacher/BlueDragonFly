@@ -45,6 +45,18 @@ class FileDatabaseService {
      * @param {string}      tableName The table name.
      * @param {Function}    callback  The callback.
      */
+    public getRow = (tableName: string, id: string, callback: (err: any, row?: Object) => void): void => {
+        const tablePath = this._path.join(this._databaseDir, tableName, id);
+        const path = this._path.normalize(tablePath);
+
+        this._fileSystem.readFile(path, callback);
+    };
+
+    /**
+     * @summary Gets rows.
+     * @param {string}      tableName The table name.
+     * @param {Function}    callback  The callback.
+     */
     public getRows = (tableName: string, callback: (err: any, rows?: Array<Object>) => void): void => {
         const tablePath = this._path.join(this._databaseDir, tableName);
         const path = this._path.normalize(tablePath);
@@ -53,7 +65,7 @@ class FileDatabaseService {
             if (!error) {
                 async.map(files, (file, callback) => {
                     const absoluteFile = this._path.join(path, file);
-                    this._fileSystem.readFile(absoluteFile, "utf8", callback);
+                    this._fileSystem.readFile(absoluteFile, callback);
                 }, function(error, results) {
                     callback(error, results);
                 });

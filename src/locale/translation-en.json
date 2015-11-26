@@ -19,5 +19,8 @@
                 "invalidLength": "The message must have 3 to 500 characters required."
             }
         }
+    },
+    "error": {
+        "notFound": "Not found"
     }
 }

@@ -31,17 +31,32 @@ describe('FileDatabaseService', function() {
         });
     });
 
-    it('should return a file with specific content', function(done) {
-        fileDatabase.getRows('table', function(error, files) {
-            assert.isNull(error);
-            assert.isNotNull(files);
-            assert.equal(files.length, 2);
+    it('should return a error instead files', function(done) {
+        fileDatabase.getRows('notFound', function(error, files) {
+            assert.isNotNull(error);
+            assert.isUndefined(files);
 
-            var file = files[0];
-            assert.isString(file);
+            done();
+        });
+    });
+
+    it('should return a file with specific content', function(done) {
+        fileDatabase.getRow('table', 'first.json', function(error, file) {
+            assert.isNull(error);
+            assert.isNotNull(file);
+            assert.isObject(file);
 
             var json = JSON.parse(file);
             assert.equal(json.name, 'Hello world!');
+
+            done();
+        });
+    });
+
+    it('should return a error instead file', function(done) {
+        fileDatabase.getRow('table', 'notFound.json', function(error, file) {
+            assert.isNotNull(error);
+            assert.isUndefined(file);
 
             done();
         });

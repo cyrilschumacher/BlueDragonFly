@@ -43,7 +43,11 @@ class IndexController {
      * @param response  The HTTP response.
      */
     public notFound(request: express.Request, response: express.Response): void {
-        response.status(404).json({ error: "Not found" });
+        const i18n = request["i18n"];
+        const body = {
+            error: i18n.t("error.notFound")
+        };
+        response.status(404).json(body);
     };
 }
 
