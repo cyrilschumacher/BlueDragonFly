@@ -53,6 +53,7 @@ class MailController {
 
     /**
      * @summary Constructor.
+     * @constructor
      */
     public constructor() {
         this._htmlMailerService = new HtmlMailerService(transport, settings.mail.from, settings.mail.templateDir);
@@ -104,15 +105,15 @@ class MailController {
                             response.end();
                         } else {
                             logger.error(errors);
-                            response.status(500).end(util.inspect(errors));
+                            response.status(500).json(util.inspect(errors));
                         }
                     });
                 } else {
-                    response.status(400).end(util.inspect(errors));
+                    response.status(400).json(util.inspect(errors));
                 }
             });
         } else {
-            response.status(400).end(util.inspect(errors));
+            response.status(400).json(util.inspect(errors));
         }
     };
 }

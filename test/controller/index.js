@@ -1,4 +1,6 @@
-// Dependencies.
+'use strict';
+
+/* Dependencies */
 var app = require('../../dist/app');
 var request = require('supertest');
 var assert = require('chai').assert;

@@ -1,11 +1,14 @@
+'use strict';
+
+/* Dependencies */
 var assert = require('chai').assert;
 var nock = require('nock');
 var request = require('supertest');
-var reCaptchaService = require('../../dist/service/reCaptcha');
+var ReCaptchaService = require('../../dist/service/reCaptcha');
 
 describe('ReCaptchaService', function() {
     // Global variables.
-    var reCaptcha = new reCaptchaService();
+    var reCaptcha = new ReCaptchaService();
 
     /**
      * @summary Runs before each test.
@@ -16,12 +19,24 @@ describe('ReCaptchaService', function() {
             .reply(200, {
                 success: true
             });
+
+        nock('https://www.google.com/recaptcha/api/')
+            .get('/siteverify?secret=&response=other')
+            .reply(500);
     });
 
     it('should return a success', function(done) {
         var response = 'test';
-        reCaptcha.verify('test', function(callback) {
-            assert.ok(callback, true);
+        reCaptcha.verify(response, function(callback) {
+            assert.ok(callback);
+            done();
+        });
+    });
+
+    it('should return a error', function(done) {
+        var response = 'other';
+        reCaptcha.verify(response, function(callback) {
+            assert.notOk(callback);
             done();
         });
     });

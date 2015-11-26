@@ -1,13 +1,14 @@
-// Dependencies.
+/* Dependencies */
 var assert = require('chai').assert;
 var MailDev = require('maildev');
 var nodemailer = require('nodemailer');
 var request = require('supertest');
 var HtmlMailerService = require('../../dist/service/htmlMailer');
 
-// Global variables.
+/* Global variables */
 var htmlMailer = new HtmlMailerService(),
-    maildev = new MailDev();
+    maildev = new MailDev(),
+    transport;
 
 describe('HtmlMailerService', function() {
     /**
@@ -15,17 +16,30 @@ describe('HtmlMailerService', function() {
      */
     before(function() {
         maildev.listen();
-    });
-
-    it('should send a email', function(done) {
-        var transport = nodemailer.createTransport({
+        transport = nodemailer.createTransport({
             port: 1025,
             ignoreTLS: true,
         });
+    });
 
-        var htmlMailer = new HtmlMailerService(transport, 'admin@test.com', 'test/resources/template/mail/');
+    it('should send a email', function(done) {
+        var from = 'admin@test.com';
+        var templateDir = 'test/resources/template/mail/';
+        var htmlMailer = new HtmlMailerService(transport, from, templateDir);
+
         htmlMailer.send('jean.dupond@test.com', 'Subject', {}, function(errors) {
             assert.isNull(errors);
+            done();
+        });
+    });
+
+    it('should return a error', function(done) {
+        var from = 'admin@test.com';
+        var templateDir = 'path/not/exists/';
+        var htmlMailer = new HtmlMailerService(transport, from, templateDir);
+
+        htmlMailer.send('jean.dupond@test.com', 'Subject', {}, function(errors) {
+            assert.isNotNull(errors);
             done();
         });
     });

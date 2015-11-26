@@ -24,6 +24,7 @@
 import express = require("express");
 import IndexController = require("../controller/index");
 import MailController = require("../controller/mail");
+import ResumeController = require("../controller/resume");
 
 var logger = require("./bunyan");
 
@@ -41,5 +42,11 @@ export function initialize(app: express.Express) {
     // Index.
     var indexController = new IndexController();
     app.get("/", indexController.default);
+
+    // Resume.
+    var resumeController = new ResumeController();
+    app.get("/resume/education", resumeController.getEducationSection);
+
+    // Error.
     app.use(indexController.notFound);
 }

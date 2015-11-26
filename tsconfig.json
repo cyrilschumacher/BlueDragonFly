@@ -21,12 +21,12 @@
         "./src/configuration/transport.ts",
         "./src/controller/index.ts",
         "./src/controller/mail.ts",
+        "./src/controller/resume.ts",
         "./src/model/request/mail.ts",
+        "./src/service/fileDatabase.ts",
         "./src/service/htmlMailer.ts",
         "./src/service/reCaptcha.ts",
-        "./src/settings.ts",
-        "./src/typing/email-templates/email-templates-tests.ts",
-        "./src/typing/email-templates/email-templates.d.ts"
+        "./src/settings.ts"
     ],
     "exclude": [],
     "atom": {

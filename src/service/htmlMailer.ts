@@ -21,7 +21,7 @@
  * SOFTWARE.
  */
 
-///<reference path="../typing/email-templates/email-templates.d.ts"/>
+///<reference path="../../typings/email-templates/email-templates.d.ts"/>
 ///<reference path="../../typings/nodemailer/nodemailer.d.ts"/>
 
 import EmailTemplates = require("email-templates");

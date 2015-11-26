@@ -1,4 +1,6 @@
-// Dependencies.
+'use strict';
+
+/* Dependencies */
 var app = require('../../dist/app');
 var assert = require('assert');
 var MailDev = require('maildev');

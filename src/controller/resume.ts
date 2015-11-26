@@ -21,30 +21,47 @@
  * SOFTWARE.
  */
 
+///<reference path="../../typings/i18next/i18next.d.ts"/>
+
 import express = require("express");
+import logger = require("../configuration/bunyan");
+import fs = require("fs");
+import util = require("util");
+import path = require("path");
+
+import FileDatabaseService = require("../service/fileDatabase");
+
+var settings = require("../settings");
 
 /**
- * @summary Controller for index.
+ * @summary Controller for mail.
  * @class
  */
-class IndexController {
+class ResumeController {
+    private _fileDatabaseService: FileDatabaseService;
     /**
-     * @summary Default page.
-     * @param request   The HTTP request.
-     * @param response  The HTTP response.
+     * @summary Constructor.
+     * @constructor
      */
-    public default(request: express.Request, response: express.Response): void {
-        response.end();
-    };
+    public constructor() {
+        this._fileDatabaseService = new FileDatabaseService("dist/resource/resume/", fs, path);
+    }
 
     /**
-     * @summary Not found page.
-     * @param request   The HTTP request.
-     * @param response  The HTTP response.
+     * @summary Gets the education section.
+     * @param {Request}   request   The HTTP request.
+     * @param {Response}  response  The HTTP response.
      */
-    public notFound(request: express.Request, response: express.Response): void {
-        response.status(404).json({ error: "Not found" });
+    public getEducationSection = (request: express.Request, response: express.Response): void => {
+        this._fileDatabaseService.getRows("education", (error, files) => {
+            if (!error) {
+                const json = JSON.stringify(files);
+                response.json(JSON.parse(json));
+            } else {
+                response.status(500).json(util.inspect(error));
+            }
+        });
     };
 }
 
-export = IndexController;
+export = ResumeController;
