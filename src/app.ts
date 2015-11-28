@@ -33,7 +33,7 @@ import bodyParser = require("body-parser");
 import expressValidator = require("express-validator");
 
 // Creates express application.
-var app = express();
+const app = express();
 
 // Configures express application.
 app.use(bodyParser.urlencoded({ extended: true }));

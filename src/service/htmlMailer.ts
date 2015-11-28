@@ -27,8 +27,6 @@
 import EmailTemplates = require("email-templates");
 import nodemailer = require("nodemailer");
 
-var settings = require("../settings");
-
 /**
  * @summary Service for send a HTML mail.
  * @class

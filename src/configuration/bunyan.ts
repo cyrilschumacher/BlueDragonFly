@@ -24,6 +24,6 @@
 /// <reference path="../../typings/bunyan/bunyan.d.ts"/>
 
 import bunyan = require("bunyan");
-var settings = require("../settings");
+const settings = require("../settings");
 
 export = bunyan.createLogger(settings.bunyan);

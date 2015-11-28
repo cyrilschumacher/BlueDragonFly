@@ -4,7 +4,6 @@ node_js:
 before_install:
   - npm install -g coveralls
   - npm install -g gulp
-  - npm install -g karma-cli
   - npm install -g tsd
 install:
   - npm install

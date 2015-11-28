@@ -26,8 +26,7 @@
 import errorHandler = require("errorhandler");
 import express = require("express");
 
-var logger = require("./bunyan");
-var settings = require("../settings");
+const logger = require("./bunyan");
 
 /**
  * @summary Initializes production environment.
@@ -43,7 +42,7 @@ function _initializeProductionEnvironment(app: express.Express) {
  */
 function _initializeDevelopmentEnvironment(app: express.Express) {
     const options = { log: true };
-    app.use(errorHandler());
+    app.use(errorHandler(options));
 }
 
 /**

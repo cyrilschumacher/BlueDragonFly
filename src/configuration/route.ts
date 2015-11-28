@@ -26,7 +26,7 @@ import IndexController = require("../controller/index");
 import MailController = require("../controller/mail");
 import ResumeController = require("../controller/resume");
 
-var logger = require("./bunyan");
+const logger = require("./bunyan");
 
 /**
  * @summary Initializes routes.
@@ -36,15 +36,15 @@ export function initialize(app: express.Express) {
     logger.info("Initializes Express routes.");
 
     // Mail.
-    var mailController = new MailController();
+    const mailController = new MailController();
     app.post("/mail/send", mailController.send);
 
     // Index.
-    var indexController = new IndexController();
+    const indexController = new IndexController();
     app.get("/", indexController.default);
 
     // Resume.
-    var resumeController = new ResumeController();
+    const resumeController = new ResumeController();
     app.get("/resume/education", resumeController.getEducationSection);
 
     // Error.

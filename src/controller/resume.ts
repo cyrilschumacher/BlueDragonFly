@@ -24,14 +24,11 @@
 ///<reference path="../../typings/i18next/i18next.d.ts"/>
 
 import express = require("express");
-import logger = require("../configuration/bunyan");
 import fs = require("fs");
 import util = require("util");
 import path = require("path");
 
 import FileDatabaseService = require("../service/fileDatabase");
-
-var settings = require("../settings");
 
 /**
  * @summary Controller for mail.

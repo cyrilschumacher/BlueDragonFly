@@ -32,7 +32,7 @@ import MailModel = require("../model/request/mail");
 import HtmlMailerService = require("../service/htmlMailer");
 import ReCaptchaService = require("../service/reCaptcha");
 
-var settings = require("../settings");
+const settings = require("../settings");
 
 /**
  * @summary Controller for mail.
@@ -95,17 +95,17 @@ class MailController {
      * @param {Response}  response  The HTTP response.
      */
     public send = (request: express.Request, response: express.Response): void => {
-        var errors = this._assertMailInformation(request);
+        let errors = this._assertMailInformation(request);
         if (!errors) {
-            var model = new MailModel(request);
+            const model = new MailModel(request);
             this._reCaptchaService.verify(model.captcha, (success: boolean) => {
                 if (success) {
-                    this._htmlMailerService.send(model.emailAddress, model.subject, model, (errors: any) => {
+                    this._htmlMailerService.send(model.emailAddress, model.subject, model, sendErrors => {
                         if (!errors) {
                             response.end();
                         } else {
                             logger.error(errors);
-                            response.status(500).json(util.inspect(errors));
+                            response.status(500).json(util.inspect(sendErrors));
                         }
                     });
                 } else {

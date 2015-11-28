@@ -5,6 +5,7 @@ var path = require('path');
 var server = require('gulp-express');
 var plumber = require('gulp-plumber');
 var ts = require('gulp-typescript');
+var tslint = require('gulp-tslint');
 
 var paths = {
     destination: path.join(__dirname, 'dist/'),
@@ -23,6 +24,7 @@ function exec_copy() {
 
 /**
  * @summary Compiles TypeScript files to JavaScript files.
+ * @param {Function} cb The callback.
  */
 function exec_typescript(cb) {
     var source = [path.normalize(paths.source + '**/*.ts'), path.normalize('!' + paths.source + 'typing/**/*.ts')];
@@ -57,8 +59,22 @@ function exec_server() {
     gulp.watch(['dist/**/*.json', 'dist/**/*.scss', 'dist/**/*.jade', 'dist/**/*.js'], server.run);
 }
 
+/**
+ * @summary Checks the code quality.
+ * @param {Function} cb The callback.
+ */
+function exec_tslint(cb) {
+    var source = [path.normalize(paths.source + '**/*.ts'), path.normalize('!' + paths.source + 'typing/**/*.ts')];
+    gulp.src(source)
+        .pipe(tslint())
+        .pipe(tslint.report('verbose'));
+
+    if (cb && typeof cb === 'function') cb();
+}
+
 gulp.task('copy', exec_copy);
 gulp.task('server', exec_server);
+gulp.task('tslint', exec_tslint);
 gulp.task('typescript', exec_typescript);
 
 gulp.task('default', ['typescript', 'copy']);

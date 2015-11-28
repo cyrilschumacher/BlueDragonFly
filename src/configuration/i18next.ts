@@ -27,8 +27,8 @@
 import express = require("express");
 import i18next = require("i18next");
 
-var logger = require("./bunyan");
-var settings = require("../settings");
+const logger = require("./bunyan");
+const settings = require("../settings");
 
 /**
  * @summary Initializes i18next.

@@ -23,8 +23,8 @@
 
 import express = require("express");
 
-var logger = require("./bunyan");
-var settings = require("../settings");
+const logger = require("./bunyan");
+const settings = require("../settings");
 
 /**
  * @summary Initializes the express startup.

@@ -44,7 +44,6 @@ describe('FileDatabaseService', function() {
         fileDatabase.getRow('table', 'first.json', function(error, file) {
             assert.isNull(error);
             assert.isNotNull(file);
-            assert.isObject(file);
 
             var json = JSON.parse(file);
             assert.equal(json.name, 'Hello world!');

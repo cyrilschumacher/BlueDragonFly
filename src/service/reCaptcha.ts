@@ -21,10 +21,11 @@
  * SOFTWARE.
  */
 
+import http = require("http");
 import https = require("https");
 import util = require("util");
 
-var settings = require("../settings");
+const settings = require("../settings");
 
 /**
  * @summary Service for Google ReCaptcha.
@@ -33,31 +34,36 @@ var settings = require("../settings");
 class ReCaptchaService {
     /**
      * @summary Verify if the response of captcha is correct.
+     * @param {string}      response    The HTTP response.
+     * @param {Function}    callback    The callback.
+     */
+    private _verify = (response: http.IncomingMessage, callback: (success: boolean) => void): void => {
+        let data = "";
+        response.on("data", function(chunk: any) {
+            data += chunk.toString();
+        });
+
+        response.on("end", function() {
+            try {
+                const parsedData = JSON.parse(data);
+                callback(parsedData.success);
+            } catch (e) {
+                callback(false);
+            }
+        });
+    };
+
+    /**
+     * @summary Verify if the response of captcha is correct.
      * @param {string}      response    The captcha response.
      * @param {Function}    callback    The callback.
      */
-    public verify(response: string, callback: (success: boolean) => void): void {
+    public verify = (response: string, callback: (success: boolean) => void): void => {
         const ORIGINAL_URL = "https://www.google.com/recaptcha/api/siteverify?secret=%s&response=%s";
         const URL = util.format(ORIGINAL_URL, settings.reCaptcha.secret, response);
 
-        https.get(URL, response => {
-            var data = "";
-
-            response.on("data", function(chunk: any) {
-                data += chunk.toString();
-            });
-
-            response.on("end", function() {
-                try {
-                    var parsedData = JSON.parse(data);
-                    callback(parsedData.success);
-                } catch (e) {
-                    callback(false);
-                }
-            });
-
-        });
-    }
+        https.get(URL, res => this._verify(res, callback));
+    };
 }
 
 export = ReCaptchaService;

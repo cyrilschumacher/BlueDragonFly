@@ -63,11 +63,11 @@ class FileDatabaseService {
 
         this._fileSystem.readdir(path, (error: NodeJS.ErrnoException, files: Array<string>) => {
             if (!error) {
-                async.map(files, (file, callback) => {
+                async.map(files, (file, asyncCallback) => {
                     const absoluteFile = this._path.join(path, file);
-                    this._fileSystem.readFile(absoluteFile, callback);
-                }, function(error, results) {
-                    callback(error, results);
+                    this._fileSystem.readFile(absoluteFile, asyncCallback);
+                }, function(asyncError, results) {
+                    callback(asyncError, results);
                 });
             } else {
                 callback(error);
