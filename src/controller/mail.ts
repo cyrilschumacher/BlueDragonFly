@@ -94,27 +94,31 @@ class MailController {
      * @param {Request}   request   The HTTP request.
      * @param {Response}  response  The HTTP response.
      */
-    public send = (request: express.Request, response: express.Response): void => {
+    public send = (request: express.Request, response: express.Response): express.Response => {
         let errors = this._assertMailInformation(request);
-        if (!errors) {
-            const model = new MailModel(request);
-            this._reCaptchaService.verify(model.captcha, (success: boolean) => {
-                if (success) {
-                    this._htmlMailerService.send(model.emailAddress, model.subject, model, sendErrors => {
-                        if (!errors) {
-                            response.end();
-                        } else {
-                            logger.error(errors);
-                            response.status(500).json(util.inspect(sendErrors));
-                        }
-                    });
-                } else {
-                    response.status(400).json(util.inspect(errors));
-                }
-            });
-        } else {
-            response.status(400).json(util.inspect(errors));
+        if (errors) {
+            const body = util.inspect(errors);
+            return response.status(400).json(body);
         }
+
+        const model = new MailModel(request);
+        this._reCaptchaService.verify(model.captcha, (success: boolean) => {
+            if (!success) {
+                const body = util.inspect(errors);
+                return response.status(400).json(body);
+            }
+
+            this._htmlMailerService.send(model.emailAddress, model.subject, model, sendErrors => {
+                if (errors) {
+                    logger.error(errors);
+
+                    const body = util.inspect(sendErrors);
+                    return response.status(500).json(body);
+                }
+
+                return response.end();
+            });
+        });
     };
 }
 

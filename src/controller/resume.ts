@@ -35,7 +35,12 @@ import FileDatabaseService = require("../service/fileDatabase");
  * @class
  */
 class ResumeController {
+    /**
+     * @summary Service for manage File database.
+     * @type {FileDatabaseService}
+     */
     private _fileDatabaseService: FileDatabaseService;
+
     /**
      * @summary Constructor.
      * @constructor
@@ -51,12 +56,15 @@ class ResumeController {
      */
     public getEducationSection = (request: express.Request, response: express.Response): void => {
         this._fileDatabaseService.getRows("education", (error, files) => {
-            if (!error) {
-                const json = JSON.stringify(files);
-                response.json(JSON.parse(json));
-            } else {
-                response.status(500).json(util.inspect(error));
+            if (error) {
+                const body = util.inspect(error);
+                return response.status(500).json(body);
             }
+
+            const json = JSON.stringify(files);
+            const body = JSON.parse(json);
+
+            response.json(body);
         });
     };
 }

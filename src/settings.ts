@@ -8,12 +8,12 @@ module.exports = {
             },
             {
                 level: "error",
-                stream: process.stdout
+                stream: process.stderr
             }
         ]
     },
     express: {
-        listen: 3000
+        listen: 6000
     },
     mail: {
         templateDir: "dist/resource/template/mail/",

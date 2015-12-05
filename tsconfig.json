@@ -13,6 +13,7 @@
     ],
     "files": [
         "./src/app.ts",
+        "./src/cluster.ts",
         "./src/configuration/bunyan.ts",
         "./src/configuration/environment.ts",
         "./src/configuration/i18next.ts",
