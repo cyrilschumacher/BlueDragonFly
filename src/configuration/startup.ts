@@ -21,17 +21,17 @@
  * SOFTWARE.
  */
 
+import bunyan = require("./bunyan");
 import express = require("express");
-
-const logger = require("./bunyan");
-const settings = require("../settings");
+import nconf = require("./nconf");
 
 /**
  * @summary Initializes the express startup.
  * @param {Express} app The express application.
  */
 export function initialize(app: express.Express) {
-    return app.listen(settings.express.listen, () => {
-        logger.info("Started Express server listening on port %d in %s mode.", settings.express.listen, app.settings.env);
+    const port = nconf.get("express:listen");
+    return app.listen(port, () => {
+        bunyan.info("Started Express server listening on port %d in %s mode.", port, app.settings.env);
     });
 }

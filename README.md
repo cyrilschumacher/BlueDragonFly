@@ -1,6 +1,5 @@
 # Blue DragonFly
 
-
 [![Build Status](https://travis-ci.org/cyrilschumacher/BlueDragonFly.svg)](https://travis-ci.org/cyrilschumacher/BlueDragonFly)
 [![MIT License][license-image]][license-url]
 [![typescript-standard-style][standard-image]][standard-url]

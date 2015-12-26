@@ -24,6 +24,7 @@
 ///<reference path="../../typings/nodemailer/nodemailer.d.ts"/>
 
 import nodemailer = require("nodemailer");
+import nconf = require("./nconf");
 
-const settings = require("../settings");
-export = nodemailer.createTransport(settings.smtp);
+const options = nconf.get("nodemailer");
+export = nodemailer.createTransport(options);

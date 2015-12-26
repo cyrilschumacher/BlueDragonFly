@@ -25,7 +25,7 @@
 
 import errorHandler = require("errorhandler");
 import express = require("express");
-import logger = require("./bunyan");
+import bunyan = require("./bunyan");
 
 /**
  * @summary Initializes production environment.
@@ -49,7 +49,7 @@ function _initializeDevelopmentEnvironment(app: express.Express) {
  * @param {Express} app The express application.
  */
 export function initialize(app: express.Express) {
-    logger.info("Initializes Express environment.");
+    bunyan.info("Initializes Express environment.");
 
     const env = process.env.NODE_ENV || "development";
     if (env === "production") {

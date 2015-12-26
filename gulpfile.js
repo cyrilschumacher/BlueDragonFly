@@ -2,7 +2,6 @@
 
 var gulp = require('gulp');
 var path = require('path');
-var server = require('gulp-express');
 var plumber = require('gulp-plumber');
 var ts = require('gulp-typescript');
 var tslint = require('gulp-tslint');
@@ -46,17 +45,11 @@ function exec_typescript(cb) {
 }
 
 /**
- * @summary Executes server.
+ * @summary Watches files.
  */
-function exec_server() {
-    // Start the server at the beginning of the task.
-    server.run(['--harmony', 'dist/cluster.js']);
-
-    // Restart the server when file changes
+function watch() {
     gulp.watch(['src/**/*.ts', '!src/typing/**/*.ts'], exec_typescript);
     gulp.watch(['src/**/*.json', 'src/**/*.scss', 'src/**/*.jade'], exec_copy);
-
-    gulp.watch(['dist/**/*.json', 'dist/**/*.scss', 'dist/**/*.jade', 'dist/**/*.js'], server.run);
 }
 
 /**
@@ -73,8 +66,8 @@ function exec_tslint(cb) {
 }
 
 gulp.task('copy', exec_copy);
-gulp.task('server', exec_server);
 gulp.task('tslint', exec_tslint);
 gulp.task('typescript', exec_typescript);
+gulp.task('watch', watch);
 
 gulp.task('default', ['typescript', 'copy']);

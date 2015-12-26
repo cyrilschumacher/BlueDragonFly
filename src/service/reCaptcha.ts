@@ -23,9 +23,8 @@
 
 import http = require("http");
 import https = require("https");
+import nconf = require("../configuration/nconf");
 import util = require("util");
-
-const settings = require("../settings");
 
 /**
  * @summary Service for Google ReCaptcha.
@@ -60,7 +59,8 @@ class ReCaptchaService {
      */
     public verify = (response: string, callback: (success: boolean) => void): void => {
         const ORIGINAL_URL = "https://www.google.com/recaptcha/api/siteverify?secret=%s&response=%s";
-        const URL = util.format(ORIGINAL_URL, settings.reCaptcha.secret, response);
+        const secret = nconf.get("reCaptcha:secret");
+        const URL = util.format(ORIGINAL_URL, secret, response);
 
         https.get(URL, res => this._verify(res, callback));
     };

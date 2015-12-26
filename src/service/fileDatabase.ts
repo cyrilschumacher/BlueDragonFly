@@ -65,7 +65,9 @@ class FileDatabaseService {
             if (!error) {
                 async.map(files, (file, asyncCallback) => {
                     const absoluteFile = this._path.join(path, file);
-                    this._fileSystem.readFile(absoluteFile, asyncCallback);
+                    this._fileSystem.readFile(absoluteFile, "utf8", (err, data) => {
+                        asyncCallback(err, JSON.parse(data));
+                    });
                 }, function(asyncError, results) {
                     callback(asyncError, results);
                 });

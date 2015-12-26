@@ -24,15 +24,14 @@
 ///<reference path="../../typings/i18next/i18next.d.ts"/>
 
 import express = require("express");
-import logger = require("../configuration/bunyan");
+import bunyan = require("../configuration/bunyan");
+import nconf = require("../configuration/nconf");
 import util = require("util");
 import transport = require("../configuration/transport");
 
 import MailModel = require("../model/request/mail");
 import HtmlMailerService = require("../service/htmlMailer");
 import ReCaptchaService = require("../service/reCaptcha");
-
-const settings = require("../settings");
 
 /**
  * @summary Controller for mail.
@@ -56,7 +55,10 @@ class MailController {
      * @constructor
      */
     public constructor() {
-        this._htmlMailerService = new HtmlMailerService(transport, settings.mail.from, settings.mail.templateDir);
+        const from = nconf.get("mail:from");
+        const templateDir = nconf.get("mail:templateDir");
+
+        this._htmlMailerService = new HtmlMailerService(transport, from, templateDir);
         this._reCaptchaService = new ReCaptchaService();
     }
 
@@ -110,7 +112,7 @@ class MailController {
 
             this._htmlMailerService.send(model.emailAddress, model.subject, model, sendErrors => {
                 if (errors) {
-                    logger.error(errors);
+                    bunyan.error(errors);
 
                     const body = util.inspect(sendErrors);
                     return response.status(500).json(body);

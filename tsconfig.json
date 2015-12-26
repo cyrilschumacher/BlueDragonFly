@@ -1,7 +1,7 @@
 {
     "compileOnSave": false,
     "compilerOptions": {
-        "target": "ES5",
+        "target": "ES6",
         "module": "commonjs",
         "noImplicitAny": true,
         "removeComments": true,
@@ -17,6 +17,7 @@
         "./src/configuration/bunyan.ts",
         "./src/configuration/environment.ts",
         "./src/configuration/i18next.ts",
+        "./src/configuration/nconf.ts",
         "./src/configuration/route.ts",
         "./src/configuration/startup.ts",
         "./src/configuration/transport.ts",
@@ -26,8 +27,7 @@
         "./src/model/request/mail.ts",
         "./src/service/fileDatabase.ts",
         "./src/service/htmlMailer.ts",
-        "./src/service/reCaptcha.ts",
-        "./src/settings.ts"
+        "./src/service/reCaptcha.ts"
     ],
     "exclude": [],
     "atom": {

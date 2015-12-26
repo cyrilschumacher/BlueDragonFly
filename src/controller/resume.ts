@@ -61,10 +61,23 @@ class ResumeController {
                 return response.status(500).json(body);
             }
 
-            const json = JSON.stringify(files);
-            const body = JSON.parse(json);
+            response.json(files);
+        });
+    };
 
-            response.json(body);
+    /**
+     * @summary Gets the experience section.
+     * @param {Request}   request   The HTTP request.
+     * @param {Response}  response  The HTTP response.
+     */
+    public getExperienceSection = (request: express.Request, response: express.Response): void => {
+        this._fileDatabaseService.getRows("experience", (error, files) => {
+            if (error) {
+                const body = util.inspect(error);
+                return response.status(500).json(body);
+            }
+
+            response.json(files);
         });
     };
 }

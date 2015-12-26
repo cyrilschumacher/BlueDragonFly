@@ -60,10 +60,10 @@ class HtmlMailerService {
     private _createMailOptions = (to: string, subject: string, text: string, html?: string): nodemailer.SendMailOptions => {
         return {
             from: this._from,
-            to: to,
-            subject: subject,
             html: html,
-            text: text
+            subject: subject,
+            text: text,
+            to: to
         };
     };
 

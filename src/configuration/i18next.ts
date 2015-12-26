@@ -26,17 +26,17 @@
 
 import express = require("express");
 import i18next = require("i18next");
-
-const logger = require("./bunyan");
-const settings = require("../settings");
+import bunyan = require("./bunyan");
+import nconf = require("./nconf");
 
 /**
  * @summary Initializes i18next.
  * @param {Express} app The express application.
  */
 export function initialize(app: express.Express) {
-    logger.info("Initializes localization.");
+    bunyan.info("Initializes localization.");
 
-    i18next.init(settings.i18next);
+    const options = nconf.get("i18next");
+    i18next.init(options);
     app.use(i18next["handle"]);
 }

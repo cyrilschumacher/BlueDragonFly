@@ -1,0 +1,24 @@
+{
+    "bunyan": {
+        "name": "Blue DragonFly"
+    },
+    "express": {
+        "listen": 3005
+    },
+    "mail": {
+        "templateDir": "dist/resource/template/mail/",
+        "from": "admin@test.com"
+    },
+    "i18next": {
+        "dynamicLoad": true,
+        "fallbackLng": "en",
+        "resGetPath": "dist/locale/__ns__-__lng__.json"
+    },
+    "reCaptcha": {
+        "secret": ""
+    },
+    "nodemailer": {
+        "ignoreTLS": true,
+        "port": 1025
+    }
+}

@@ -21,10 +21,10 @@
  * SOFTWARE.
  */
 
-/// <reference path="../../typings/bunyan/bunyan.d.ts"/>
+import nconf = require("nconf");
+import path = require("path");
 
-import bunyan = require("bunyan");
-import nconf = require("./nconf");
+const configurationRelativePath = path.join(__dirname, "../configuration.json");
+const configurationPath = path.normalize(configurationRelativePath);
 
-const options = nconf.get("bunyan");
-export = bunyan.createLogger(options);
+export = nconf.file(configurationPath);
