@@ -43,6 +43,6 @@
     "nock": "^5.2.1",
     "supertest": "^1.1.0",
     "tslint": "^3.2.1",
-    "typescript": "^1.8.0-dev.20151121"
+    "typescript": "^1.7.5"
   }
 }
