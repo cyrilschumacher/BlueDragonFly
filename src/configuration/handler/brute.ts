@@ -21,55 +21,32 @@
  * SOFTWARE.
  */
 
-import express = require("express");
+import * as express from "express";
+import * as ExpressBrute from "express-brute";
+import * as MemcachedStore from "express-brute-memcached";
+import logger = require("../bunyan");
+
+var configuration = require("../../configuration");
 
 /**
- * @summary Represents the request for send a e-mail
- * @class
+ * @summary Initializes environment.
+ * @param {Express} app The express application.
  */
-class MailRequestModel {
-    /**
-     * @summary Captcha response.
-     * @type {string}
-     */
-    public captcha: string;
+export function initialize(app: express.Express) {
+    logger.info("Initializes brute-force protection middleware.");
 
-    /**
-     * @summary E-mail address.
-     * @type {string}
-     */
-    public emailAddress: string;
+    let store: any;
+    if (process.env.NODE_ENV === "production") {
+        logger.info("Using MemcachedStore for brute-force protection middleware.");
 
-    /**
-     * @summary Message.
-     * @type {string}
-     */
-    public message: string;
-
-    /**
-     * @summary Complete name.
-     * @type {string}
-     */
-    public name: string;
-
-    /**
-     * @summary Subject.
-     * @type {string}
-     */
-    public subject: string;
-
-    /**
-     * @summary Constructor.
-     * @constructor
-     * @param {Request}   request   The HTTP request.
-     */
-    public constructor(request: express.Request) {
-        this.captcha = request.body["g-recaptcha-response"];
-        this.emailAddress = request.body.emailAddress;
-        this.message = request.body.message;
-        this.name = request.body.name;
-        this.subject = request.body.subject;
+        const hosts = configuration.memcachedstore.host;
+        store = new MemcachedStore(hosts);
+    } else {
+        logger.info("Using in-memory store for brute-force protection middleware.");
+        store = new ExpressBrute.MemoryStore();
     }
-}
 
-export = MailRequestModel;
+    const options = configuration.expressBrute.options;
+    const brute = new ExpressBrute(store, options);
+    app.use(brute.prevent);
+}

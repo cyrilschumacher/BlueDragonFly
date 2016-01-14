@@ -1,6 +1,6 @@
 /* The MIT License (MIT)
  *
- * Copyright (c) 2015 Cyril Schumacher.fr
+ * Copyright (c) 2016 Cyril Schumacher.fr
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -57,7 +57,7 @@ class ReCaptchaService {
      * @param {string}      response    The captcha response.
      * @param {Function}    callback    The callback.
      */
-    public verify = (response: string, callback: (success: boolean) => void): void => {
+    public verifyAsync = (response: string, callback: (success: boolean) => void): void => {
         const ORIGINAL_URL = "https://www.google.com/recaptcha/api/siteverify?secret=%s&response=%s";
         const secret = nconf.get("reCaptcha:secret");
         const URL = util.format(ORIGINAL_URL, secret, response);

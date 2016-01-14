@@ -1,6 +1,6 @@
 /* The MIT License (MIT)
  *
- * Copyright (c) 2015 Cyril Schumacher.fr
+ * Copyright (c) 2016 Cyril Schumacher.fr
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,8 +20,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-///<reference path="../../typings/i18next/i18next.d.ts"/>
 
 import express = require("express");
 import bunyan = require("../configuration/bunyan");
@@ -71,20 +69,11 @@ class MailController {
     private _assertMailInformation = (request: express.Request): any => {
         const i18n = request["i18n"];
 
-        // Captcha.
         request.checkBody("g-recaptcha-response", i18n.t("assert.mail.captcha.isEmpty")).notEmpty();
-
-        // Complete name.
         request.checkBody("name", i18n.t("assert.mail.name.invalidLength")).optional().len(0, 70);
-
-        // E-mail address.
         request.checkBody("emailAddress", i18n.t("assert.mail.emailAddress.notValid")).isEmail();
-
-        // Subject.
         request.checkBody("subject", i18n.t("assert.mail.subject.isEmpty")).notEmpty();
         request.checkBody("subject", i18n.t("assert.mail.subject.invalidLength")).len(3, 255);
-
-        // Message.
         request.checkBody("message", i18n.t("assert.mail.message.isEmpty")).notEmpty();
         request.checkBody("message", i18n.t("assert.mail.message.invalidLength")).len(1, 500);
 
@@ -104,13 +93,13 @@ class MailController {
         }
 
         const model = new MailModel(request);
-        this._reCaptchaService.verify(model.captcha, (success: boolean) => {
+        this._reCaptchaService.verifyAsync(model.captcha, (success: boolean) => {
             if (!success) {
                 const body = util.inspect(errors);
                 return response.status(400).json(body);
             }
 
-            this._htmlMailerService.send(model.emailAddress, model.subject, model, sendErrors => {
+            this._htmlMailerService.sendAsync(model.emailAddress, model.subject, model, sendErrors => {
                 if (errors) {
                     bunyan.error(errors);
 

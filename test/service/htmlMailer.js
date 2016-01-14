@@ -17,7 +17,7 @@ describe('HtmlMailerService', function() {
     before(function() {
         maildev.listen();
         transport = nodemailer.createTransport({
-            port: 1025,
+            port: 1030,
             ignoreTLS: true,
         });
     });
@@ -27,7 +27,7 @@ describe('HtmlMailerService', function() {
         var templateDir = 'test/resources/template/mail/';
         var htmlMailer = new HtmlMailerService(transport, from, templateDir);
 
-        htmlMailer.send('jean.dupond@test.com', 'Subject', {}, function(errors) {
+        htmlMailer.sendAsync('jean.dupond@test.com', 'Subject', {}, function(errors) {
             assert.isNull(errors);
             done();
         });
@@ -38,7 +38,7 @@ describe('HtmlMailerService', function() {
         var templateDir = 'path/not/exists/';
         var htmlMailer = new HtmlMailerService(transport, from, templateDir);
 
-        htmlMailer.send('jean.dupond@test.com', 'Subject', {}, function(errors) {
+        htmlMailer.sendAsync('jean.dupond@test.com', 'Subject', {}, function(errors) {
             assert.isNotNull(errors);
             done();
         });

@@ -1,6 +1,6 @@
 /* The MIT License (MIT)
  *
- * Copyright (c) 2015 Cyril Schumacher.fr
+ * Copyright (c) 2016 Cyril Schumacher.fr
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,11 +21,7 @@
  * SOFTWARE.
  */
 
-/// <reference path="../typings/body-parser/body-parser.d.ts"/>
-/// <reference path="../typings/helmet/helmet.d.ts"/>
-/// <reference path="../typings/node/node.d.ts"/>
-/// <reference path="../typings/express/express.d.ts"/>
-/// <reference path="../typings/express-validator/express-validator.d.ts"/>
+/// <reference path="../typings/tsd.d.ts"/>
 
 import express = require("express");
 import helmet = require("helmet");
@@ -42,11 +38,14 @@ app.use(expressValidator());
 app.use(helmet());
 
 // Initializes environment.
-import environment = require("./configuration/environment");
+import environment = require("./configuration/handler/environment");
 environment.initialize(app);
 
+import brute = require("./configuration/handler/brute");
+brute.initialize(app);
+
 // Initializes localization.
-import i18next = require("./configuration/i18next");
+import i18next = require("./configuration/handler/i18next");
 i18next.initialize(app);
 
 // Initializes routes.

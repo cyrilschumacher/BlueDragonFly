@@ -1,20 +1,25 @@
 # Blue DragonFly
+> The Back-End part for my portfolio.
 
-[![Build Status](https://travis-ci.org/cyrilschumacher/BlueDragonFly.svg)](https://travis-ci.org/cyrilschumacher/BlueDragonFly)
+[![Build Status][travis-image]][travis-url]
 [![MIT License][license-image]][license-url]
 [![typescript-standard-style][standard-image]][standard-url]
 [![Coveralls Status][coveralls-image]][coveralls-url]
+[![david-dm Status][david-image]][david-url]
+[![david-dm devDependency Status][david-dev-dependencies-image]][david-dev-dependencies-url]
 
-The Back-End part for [www.cyrilschumacher.fr](http://www.cyrilschumacher.fr/).
+Blue DragonFly is the back-end for my portfolio website which is available at: [www.cyrilschumacher.fr](http://www.cyrilschumacher.fr/). The project use the [Node.js](http://nodejs.org/) environment with [TypeScript](http://www.github.com/Microsoft/TypeScript) language.
+
+For front-end, see the [Persona](http://www.github.com/cyrilschumacher/Persona) project.
 
 ## Getting Started
 ### Software requirements
 This project requires :
-- [Node.js](http://nodejs.org/)
+- Node.js
 - [gulp.js](http://gulpjs.com/)
 
 ### Before build
-For install Gulp, TypeScript Definition Manager and Node.js dependencies, you must enter the following command from favorite terminal:
+For install Gulp, [TypeScript Definition Manager](http://www.github.com/DefinitelyTyped/tsd) and Node.js dependencies, you must enter the following commands from favorite terminal:
 
 ```
 npm install -g gulp
@@ -24,17 +29,24 @@ tsd install
 ```
 
 ### Build
-And for build the project, enter the command:
+For build the project, enter the command:
 
 ```
 gulp
+```
+
+### Execute
+And for execute the server:
+
+```
+npm start
 ```
 
 ## Copyright and license
 
 > The MIT License (MIT)
 >
-> Copyright (c) 2015 Cyril Schumacher.fr
+> Copyright (c) 2016 Cyril Schumacher.fr
 >
 > Permission is hereby granted, free of charge, to any person obtaining a copy
 > of this software and associated documentation files (the "Software"), to deal
@@ -54,11 +66,15 @@ gulp
 > OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 > SOFTWARE.
 
+[travis-url]: https://travis-ci.org/cyrilschumacher/BlueDragonFly
+[travis-image]: https://travis-ci.org/cyrilschumacher/BlueDragonFly.svg
 [license-image]: http://img.shields.io/badge/license-MIT-blue.svg?style=flat
 [license-url]: LICENSE
-
 [standard-image]: https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat
 [standard-url]: https://github.com/Microsoft/TypeScript/wiki/Coding-guidelines
-
 [coveralls-url]: https://coveralls.io/github/cyrilschumacher/BlueDragonFly
 [coveralls-image]: https://coveralls.io/repos/cyrilschumacher/BlueDragonFly/badge.svg
+[david-url]: https://david-dm.org/cyrilschumacher/BlueDragonFly
+[david-image]: https://david-dm.org/cyrilschumacher/BlueDragonFly.svg
+[david-dev-dependencies-image]: https://david-dm.org/cyrilschumacher/BlueDragonFly/dev-status.svg
+[david-dev-dependencies-url]: https://david-dm.org/cyrilschumacher/BlueDragonFly#info=devDependencies

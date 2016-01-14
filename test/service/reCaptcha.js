@@ -27,7 +27,7 @@ describe('ReCaptchaService', function() {
 
     it('should return a success', function(done) {
         var response = 'test';
-        reCaptcha.verify(response, function(callback) {
+        reCaptcha.verifyAsync(response, function(callback) {
             assert.ok(callback);
             done();
         });
@@ -35,7 +35,7 @@ describe('ReCaptchaService', function() {
 
     it('should return a error', function(done) {
         var response = 'other';
-        reCaptcha.verify(response, function(callback) {
+        reCaptcha.verifyAsync(response, function(callback) {
             assert.notOk(callback);
             done();
         });

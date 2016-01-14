@@ -1,4 +1,11 @@
 {
+    "expressBrute": {
+        "options": {
+            "freeRetries": 3,
+            "minWait": 60000,
+            "maxWait": 900000
+        }
+    },
     "bunyan": {
         "name": "Blue DragonFly"
     },
@@ -8,6 +15,9 @@
     "mail": {
         "templateDir": "dist/resource/template/mail/",
         "from": "admin@test.com"
+    },
+    "memcachedstore": {
+        "host": "127.0.0.1"
     },
     "i18next": {
         "dynamicLoad": true,

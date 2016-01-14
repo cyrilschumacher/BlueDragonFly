@@ -1,6 +1,6 @@
 /* The MIT License (MIT)
  *
- * Copyright (c) 2015 Cyril Schumacher.fr
+ * Copyright (c) 2016 Cyril Schumacher.fr
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,9 +20,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-///<reference path="../../typings/email-templates/email-templates.d.ts"/>
-///<reference path="../../typings/nodemailer/nodemailer.d.ts"/>
 
 import EmailTemplates = require("email-templates");
 import nodemailer = require("nodemailer");
@@ -67,7 +64,14 @@ class HtmlMailerService {
         };
     };
 
-    public send = (to: string, subject: string, data: Object, callback: (error: any) => void): void => {
+    /**
+     * @summary Sends an e-mail.
+     * @param {string}      to          The recipient.
+     * @param {string}      subject     The subject.
+     * @param {Object}      data        The data.
+     * @param {Function}    callback    The callback.
+     */
+    public sendAsync = (to: string, subject: string, data: Object, callback: (error: any) => void): void => {
         this._emailTemplate.render(data, (error: any, results: any) => {
             if (!error) {
                 const text = results.text || "";

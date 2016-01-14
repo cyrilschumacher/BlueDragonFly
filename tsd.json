@@ -9,16 +9,16 @@
       "commit": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
     },
     "serve-static/serve-static.d.ts": {
-      "commit": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
+      "commit": "d1f6bde13f2209be42e86c3686761e8bfcbb50a5"
     },
     "mime/mime.d.ts": {
-      "commit": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
+      "commit": "d1f6bde13f2209be42e86c3686761e8bfcbb50a5"
     },
     "express/express.d.ts": {
-      "commit": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
+      "commit": "d1f6bde13f2209be42e86c3686761e8bfcbb50a5"
     },
     "node/node.d.ts": {
-      "commit": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
+      "commit": "d1f6bde13f2209be42e86c3686761e8bfcbb50a5"
     },
     "bunyan/bunyan.d.ts": {
       "commit": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
@@ -55,6 +55,9 @@
     },
     "async/async.d.ts": {
       "commit": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
+    },
+    "express-brute/express-brute.d.ts": {
+      "commit": "d1f6bde13f2209be42e86c3686761e8bfcbb50a5"
     }
   }
 }

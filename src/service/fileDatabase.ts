@@ -1,6 +1,6 @@
 /* The MIT License (MIT)
  *
- * Copyright (c) 2015 Cyril Schumacher.fr
+ * Copyright (c) 2016 Cyril Schumacher.fr
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,9 +20,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-///<reference path="../../typings/async/async.d.ts"/>
-///<reference path="../../typings/node/node.d.ts"/>
 
 import async = require("async");
 
@@ -65,8 +62,9 @@ class FileDatabaseService {
             if (!error) {
                 async.map(files, (file, asyncCallback) => {
                     const absoluteFile = this._path.join(path, file);
-                    this._fileSystem.readFile(absoluteFile, "utf8", (err, data) => {
-                        asyncCallback(err, JSON.parse(data));
+                    this._fileSystem.readFile(absoluteFile, "utf8", (err: any, data: string) => {
+                        const result = JSON.parse(data);
+                        asyncCallback(err, result);
                     });
                 }, function(asyncError, results) {
                     callback(asyncError, results);
