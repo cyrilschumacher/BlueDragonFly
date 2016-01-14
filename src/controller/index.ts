@@ -27,7 +27,7 @@ import express = require("express");
  * @summary Controller for index.
  * @class
  */
-class IndexController {
+export default class IndexController {
     /**
      * @summary Default page.
      * @param request   The HTTP request.
@@ -50,5 +50,3 @@ class IndexController {
         response.status(404).json(body);
     };
 }
-
-export = IndexController;

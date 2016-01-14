@@ -21,10 +21,10 @@
  * SOFTWARE.
  */
 
-import http = require("http");
-import https = require("https");
-import nconf = require("../configuration/nconf");
-import util = require("util");
+import * as http from "http";
+import * as https from "https";
+import nconf from "../configuration/nconf";
+import * as util from "util";
 
 /**
  * @summary Service for Google ReCaptcha.

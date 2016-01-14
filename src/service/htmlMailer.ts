@@ -21,8 +21,8 @@
  * SOFTWARE.
  */
 
-import EmailTemplates = require("email-templates");
-import nodemailer = require("nodemailer");
+import * as EmailTemplates from "email-templates";
+import * as nodemailer from "nodemailer";
 
 /**
  * @summary Service for send a HTML mail.

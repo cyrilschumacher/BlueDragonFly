@@ -23,8 +23,9 @@
 
 import express = require("express");
 import i18next = require("i18next");
-import bunyan = require("../bunyan");
-import nconf = require("../nconf");
+
+import bunyan from "../bunyan";
+import nconf from "../nconf";
 
 /**
  * @summary Initializes i18next.

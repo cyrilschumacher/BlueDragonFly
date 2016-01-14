@@ -21,9 +21,9 @@
  * SOFTWARE.
  */
 
-import bunyan = require("./bunyan");
-import express = require("express");
-import nconf = require("./nconf");
+import bunyan from "./bunyan";
+import * as express from "express";
+import nconf from "./nconf";
 
 /**
  * @summary Initializes the express startup.

@@ -17,7 +17,7 @@ describe('HtmlMailerService', function() {
     before(function() {
         maildev.listen();
         transport = nodemailer.createTransport({
-            port: 1030,
+            port: 1025,
             ignoreTLS: true,
         });
     });

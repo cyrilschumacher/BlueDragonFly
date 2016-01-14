@@ -21,10 +21,10 @@
  * SOFTWARE.
  */
 
-import nconf = require("nconf");
-import path = require("path");
+import * as nconf from "nconf";
+import * as path from "path";
 
 const configurationRelativePath = path.join(__dirname, "../configuration.json");
 const configurationPath = path.normalize(configurationRelativePath);
 
-export = nconf.file(configurationPath);
+export default nconf.file(configurationPath);

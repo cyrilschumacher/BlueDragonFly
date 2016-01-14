@@ -21,10 +21,8 @@
  * SOFTWARE.
  */
 
-/// <reference path="../typings/node/node.d.ts"/>
-
-import cluster = require("cluster");
-import os = require("os");
+import * as cluster from "cluster";
+import * as os from "os";
 
 /**
  * @summary Raises when the worker is exited.

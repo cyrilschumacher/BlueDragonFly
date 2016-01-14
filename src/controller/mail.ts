@@ -21,11 +21,11 @@
  * SOFTWARE.
  */
 
-import express = require("express");
-import bunyan = require("../configuration/bunyan");
-import nconf = require("../configuration/nconf");
-import util = require("util");
-import transport = require("../configuration/transport");
+import * as express from "express";
+import bunyan from "../configuration/bunyan";
+import nconf from "../configuration/nconf";
+import * as util from "util";
+import transport from "../configuration/transport";
 
 import MailModel = require("../model/request/mail");
 import HtmlMailerService = require("../service/htmlMailer");
@@ -35,7 +35,7 @@ import ReCaptchaService = require("../service/reCaptcha");
  * @summary Controller for mail.
  * @class
  */
-class MailController {
+export default class MailController {
     /**
      * @summary HTML mailer service.
      * @type {HtmlMailerService}
@@ -112,5 +112,3 @@ class MailController {
         });
     };
 }
-
-export = MailController;

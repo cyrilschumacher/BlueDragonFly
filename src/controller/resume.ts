@@ -32,7 +32,7 @@ import FileDatabaseService = require("../service/fileDatabase");
  * @summary Controller for mail.
  * @class
  */
-class ResumeController {
+export default class ResumeController {
     /**
      * @summary Service for manage File database.
      * @type {FileDatabaseService}
@@ -79,5 +79,3 @@ class ResumeController {
         });
     };
 }
-
-export = ResumeController;

@@ -22,8 +22,9 @@
  */
 
 import errorHandler = require("errorhandler");
-import express = require("express");
-import bunyan = require("../bunyan");
+
+import * as express from "express";
+import bunyan from "../bunyan";
 
 /**
  * @summary Initializes production environment.

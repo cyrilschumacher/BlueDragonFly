@@ -21,7 +21,7 @@
  * SOFTWARE.
  */
 
-import async = require("async");
+import * as async from "async";
 
 /**
  * @summary Service for send a HTML mail.

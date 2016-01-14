@@ -25,4 +25,4 @@ import bunyan = require("bunyan");
 import nconf = require("./nconf");
 
 const options = nconf.get("bunyan");
-export = bunyan.createLogger(options);
+export default bunyan.createLogger(options);

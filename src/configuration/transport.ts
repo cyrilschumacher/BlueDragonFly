@@ -21,8 +21,8 @@
  * SOFTWARE.
  */
 
-import nodemailer = require("nodemailer");
-import nconf = require("./nconf");
+import * as nodemailer from "nodemailer";
+import nconf from "./nconf";
 
 const options = nconf.get("nodemailer");
-export = nodemailer.createTransport(options);
+export default nodemailer.createTransport(options);

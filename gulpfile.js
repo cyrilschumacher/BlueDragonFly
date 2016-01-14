@@ -33,7 +33,7 @@ function exec_typescript(cb) {
         module: "commonjs",
         removeComments: true,
         sourceMap: false,
-        target: "es5"
+        target: "es6"
     };
 
     gulp.src(source)

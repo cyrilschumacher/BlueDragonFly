@@ -21,11 +21,12 @@
  * SOFTWARE.
  */
 
-import express = require("express");
-import bunyan = require("./bunyan");
-import IndexController = require("../controller/index");
-import MailController = require("../controller/mail");
-import ResumeController = require("../controller/resume");
+import * as express from "express";
+import bunyan from "./bunyan";
+
+import IndexController from "../controller/index";
+import MailController from "../controller/mail";
+import ResumeController from "../controller/resume";
 
 /**
  * @summary Initializes routes.
