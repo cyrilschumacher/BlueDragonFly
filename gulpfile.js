@@ -6,6 +6,8 @@ var plumber = require('gulp-plumber');
 var ts = require('gulp-typescript');
 var tslint = require('gulp-tslint');
 
+var tsconfig = require('./tsconfig.json');
+
 var paths = {
     destination: path.join(__dirname, 'dist/'),
     source: path.join(__dirname, 'src/')
@@ -27,14 +29,7 @@ function exec_copy() {
  */
 function exec_typescript(cb) {
     var source = [path.normalize(paths.source + '**/*.ts'), path.normalize('!' + paths.source + 'typing/**/*.ts')];
-    var options = {
-        declaration: false,
-        failOnTypeErrors: false,
-        module: "commonjs",
-        removeComments: true,
-        sourceMap: false,
-        target: "es6"
-    };
+    var options = tsconfig.compilerOptions;
 
     gulp.src(source)
         .pipe(plumber())

@@ -1,7 +1,7 @@
 {
     "compileOnSave": false,
     "compilerOptions": {
-        "target": "ES6",
+        "target": "ES5",
         "module": "commonjs",
         "noImplicitAny": true,
         "removeComments": true,
@@ -16,6 +16,7 @@
         "./src/cluster.ts",
         "./src/configuration/bunyan.ts",
         "./src/configuration/handler/brute.ts",
+        "./src/configuration/handler/cors.ts",
         "./src/configuration/handler/environment.ts",
         "./src/configuration/handler/i18next.ts",
         "./src/configuration/nconf.ts",

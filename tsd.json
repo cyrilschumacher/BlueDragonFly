@@ -1,75 +1,75 @@
 {
-  "version": "v4",
-  "repo": "borisyankov/DefinitelyTyped",
-  "ref": "master",
-  "path": "typings",
-  "bundle": "typings/tsd.d.ts",
-  "installed": {
-    "body-parser/body-parser.d.ts": {
-      "commit": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
-    },
-    "serve-static/serve-static.d.ts": {
-      "commit": "7b3d5a6ea5acda4a81f71309f1cc62354e63b681"
-    },
-    "mime/mime.d.ts": {
-      "commit": "7b3d5a6ea5acda4a81f71309f1cc62354e63b681"
-    },
-    "express/express.d.ts": {
-      "commit": "7b3d5a6ea5acda4a81f71309f1cc62354e63b681"
-    },
-    "node/node.d.ts": {
-      "commit": "7b3d5a6ea5acda4a81f71309f1cc62354e63b681"
-    },
-    "bunyan/bunyan.d.ts": {
-      "commit": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
-    },
-    "errorhandler/errorhandler.d.ts": {
-      "commit": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
-    },
-    "i18next/i18next.d.ts": {
-      "commit": "7b3d5a6ea5acda4a81f71309f1cc62354e63b681"
-    },
-    "jquery/jquery.d.ts": {
-      "commit": "7b3d5a6ea5acda4a81f71309f1cc62354e63b681"
-    },
-    "nodemailer/nodemailer.d.ts": {
-      "commit": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
-    },
-    "nodemailer-direct-transport/nodemailer-direct-transport.d.ts": {
-      "commit": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
-    },
-    "nodemailer-smtp-transport/nodemailer-smtp-transport.d.ts": {
-      "commit": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
-    },
-    "nodemailer/nodemailer-types.d.ts": {
-      "commit": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
-    },
-    "express-validator/express-validator.d.ts": {
-      "commit": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
-    },
-    "helmet/helmet.d.ts": {
-      "commit": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
-    },
-    "email-templates/email-templates.d.ts": {
-      "commit": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
-    },
-    "async/async.d.ts": {
-      "commit": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
-    },
-    "express-brute/express-brute.d.ts": {
-      "commit": "d1f6bde13f2209be42e86c3686761e8bfcbb50a5"
-    },
-    "nconf/nconf.d.ts": {
-      "commit": "d1f6bde13f2209be42e86c3686761e8bfcbb50a5"
-    },
-    "express-brute-memcached/express-brute-memcached.d.ts": {
-      "commit": "7b3d5a6ea5acda4a81f71309f1cc62354e63b681"
-    },
-    "i18next-express-middleware/i18next-express-middleware.d.ts": {
-      "commit": "7b3d5a6ea5acda4a81f71309f1cc62354e63b681"
-    },
-    "i18next-sprintf-postprocessor/i18next-sprintf-postprocessor.d.ts": {
-      "commit": "7b3d5a6ea5acda4a81f71309f1cc62354e63b681"
+    "version": "v4",
+    "repo": "borisyankov/DefinitelyTyped",
+    "ref": "master",
+    "path": "typings",
+    "bundle": "typings/tsd.d.ts",
+    "installed": {
+        "body-parser/body-parser.d.ts": {
+            "commit": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
+        },
+        "serve-static/serve-static.d.ts": {
+            "commit": "c393f8974d44840a6c9cc6d5b5c0188a8f05143d"
+        },
+        "mime/mime.d.ts": {
+            "commit": "c393f8974d44840a6c9cc6d5b5c0188a8f05143d"
+        },
+        "express/express.d.ts": {
+            "commit": "c393f8974d44840a6c9cc6d5b5c0188a8f05143d"
+        },
+        "node/node.d.ts": {
+            "commit": "c393f8974d44840a6c9cc6d5b5c0188a8f05143d"
+        },
+        "bunyan/bunyan.d.ts": {
+            "commit": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
+        },
+        "errorhandler/errorhandler.d.ts": {
+            "commit": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
+        },
+        "i18next/i18next.d.ts": {
+            "commit": "c393f8974d44840a6c9cc6d5b5c0188a8f05143d"
+        },
+        "jquery/jquery.d.ts": {
+            "commit": "c393f8974d44840a6c9cc6d5b5c0188a8f05143d"
+        },
+        "nodemailer/nodemailer.d.ts": {
+            "commit": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
+        },
+        "nodemailer-direct-transport/nodemailer-direct-transport.d.ts": {
+            "commit": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
+        },
+        "nodemailer-smtp-transport/nodemailer-smtp-transport.d.ts": {
+            "commit": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
+        },
+        "nodemailer/nodemailer-types.d.ts": {
+            "commit": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
+        },
+        "express-validator/express-validator.d.ts": {
+            "commit": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
+        },
+        "helmet/helmet.d.ts": {
+            "commit": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
+        },
+        "email-templates/email-templates.d.ts": {
+            "commit": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
+        },
+        "async/async.d.ts": {
+            "commit": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
+        },
+        "express-brute/express-brute.d.ts": {
+            "commit": "d1f6bde13f2209be42e86c3686761e8bfcbb50a5"
+        },
+        "nconf/nconf.d.ts": {
+            "commit": "70bf7e2bfeb0d5b1b651ef3219bcc65c8eec117e"
+        },
+        "cors/cors.d.ts": {
+            "commit": "70bf7e2bfeb0d5b1b651ef3219bcc65c8eec117e"
+        },
+        "i18next-express-middleware/i18next-express-middleware.d.ts": {
+            "commit": "c393f8974d44840a6c9cc6d5b5c0188a8f05143d"
+        },
+        "i18next-sprintf-postprocessor/i18next-sprintf-postprocessor.d.ts": {
+            "commit": "c393f8974d44840a6c9cc6d5b5c0188a8f05143d"
+        }
     }
-  }
 }
