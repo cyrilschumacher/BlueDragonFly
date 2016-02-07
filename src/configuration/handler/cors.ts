@@ -21,8 +21,19 @@
  * SOFTWARE.
  */
 
-import bunyan = require("bunyan");
-import nconf from "./nconf";
+import bunyan from "../bunyan";
+import nconf from "../nconf";
+import * as cors from "cors";
+import * as express from "express";
 
-const options = nconf.get("bunyan");
-export default bunyan.createLogger(options);
+/**
+ * @summary Initializes "cors" module.
+ * @param {Express} app The express application.
+ */
+export function initialize(app: express.Express) {
+    bunyan.info("Initializes CORS.");
+
+    const options = nconf.get("cors");
+    const requestHandler = cors(options);
+    app.use(requestHandler);
+}
