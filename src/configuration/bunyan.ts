@@ -21,8 +21,8 @@
  * SOFTWARE.
  */
 
-import bunyan = require("bunyan");
-import nconf = require("./nconf");
+import * as bunyan from "bunyan";
+import nconf from "./nconf";
 
 const options = nconf.get("bunyan");
 export default bunyan.createLogger(options);

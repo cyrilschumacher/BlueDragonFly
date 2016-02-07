@@ -9,16 +9,16 @@
       "commit": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
     },
     "serve-static/serve-static.d.ts": {
-      "commit": "d1f6bde13f2209be42e86c3686761e8bfcbb50a5"
+      "commit": "7b3d5a6ea5acda4a81f71309f1cc62354e63b681"
     },
     "mime/mime.d.ts": {
-      "commit": "d1f6bde13f2209be42e86c3686761e8bfcbb50a5"
+      "commit": "7b3d5a6ea5acda4a81f71309f1cc62354e63b681"
     },
     "express/express.d.ts": {
-      "commit": "d1f6bde13f2209be42e86c3686761e8bfcbb50a5"
+      "commit": "7b3d5a6ea5acda4a81f71309f1cc62354e63b681"
     },
     "node/node.d.ts": {
-      "commit": "d1f6bde13f2209be42e86c3686761e8bfcbb50a5"
+      "commit": "7b3d5a6ea5acda4a81f71309f1cc62354e63b681"
     },
     "bunyan/bunyan.d.ts": {
       "commit": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
@@ -27,10 +27,10 @@
       "commit": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
     },
     "i18next/i18next.d.ts": {
-      "commit": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
+      "commit": "7b3d5a6ea5acda4a81f71309f1cc62354e63b681"
     },
     "jquery/jquery.d.ts": {
-      "commit": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
+      "commit": "7b3d5a6ea5acda4a81f71309f1cc62354e63b681"
     },
     "nodemailer/nodemailer.d.ts": {
       "commit": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
@@ -61,6 +61,15 @@
     },
     "nconf/nconf.d.ts": {
       "commit": "d1f6bde13f2209be42e86c3686761e8bfcbb50a5"
+    },
+    "express-brute-memcached/express-brute-memcached.d.ts": {
+      "commit": "7b3d5a6ea5acda4a81f71309f1cc62354e63b681"
+    },
+    "i18next-express-middleware/i18next-express-middleware.d.ts": {
+      "commit": "7b3d5a6ea5acda4a81f71309f1cc62354e63b681"
+    },
+    "i18next-sprintf-postprocessor/i18next-sprintf-postprocessor.d.ts": {
+      "commit": "7b3d5a6ea5acda4a81f71309f1cc62354e63b681"
     }
   }
 }

@@ -66,7 +66,7 @@ class FileDatabaseService {
                         const result = JSON.parse(data);
                         asyncCallback(err, result);
                     });
-                }, function(asyncError, results) {
+                }, (asyncError, results) => {
                     callback(asyncError, results);
                 });
             } else {

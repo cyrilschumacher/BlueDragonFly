@@ -23,7 +23,7 @@
 
 import * as express from "express";
 import * as ExpressBrute from "express-brute";
-import * as MemcachedStore from "express-brute-memcached";
+import MemcachedStore from "express-brute-memcached";
 
 import bunyan from "../bunyan";
 import nconf from "../nconf";
