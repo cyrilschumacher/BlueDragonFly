@@ -21,7 +21,7 @@
  * SOFTWARE.
  */
 
-import express = require("express");
+import * as express from "express";
 
 /**
  * @summary Controller for index.

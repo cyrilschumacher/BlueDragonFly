@@ -21,7 +21,7 @@
  * SOFTWARE.
  */
 
-import express = require("express");
+import * as express from "express";
 
 /**
  * @summary Represents the request for send a e-mail
@@ -72,4 +72,4 @@ class MailRequestModel {
     }
 }
 
-export = MailRequestModel;
+export default MailRequestModel;

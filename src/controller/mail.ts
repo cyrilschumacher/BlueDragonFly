@@ -27,9 +27,9 @@ import nconf from "../configuration/nconf";
 import * as util from "util";
 import transport from "../configuration/transport";
 
-import MailModel = require("../model/request/mail");
-import HtmlMailerService = require("../service/htmlMailer");
-import ReCaptchaService = require("../service/reCaptcha");
+import MailModel from "../model/request/mail";
+import HtmlMailerService from "../service/htmlMailer";
+import ReCaptchaService from "../service/reCaptcha";
 
 /**
  * @summary Controller for mail.

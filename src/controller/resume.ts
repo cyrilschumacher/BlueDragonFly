@@ -21,12 +21,12 @@
  * SOFTWARE.
  */
 
-import express = require("express");
-import fs = require("fs");
-import util = require("util");
-import path = require("path");
+import * as express from "express";
+import * as fs from "fs";
+import * as util from "util";
+import * as path from "path";
 
-import FileDatabaseService = require("../service/fileDatabase");
+import FileDatabaseService from "../service/fileDatabase";
 
 /**
  * @summary Controller for mail.

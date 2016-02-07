@@ -9,5 +9,5 @@ install:
   - npm install
   - tsd install
 before_script: gulp
-script: npm coverage
+script: npm run-script coverage
 after_success: "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"

@@ -66,4 +66,4 @@ class ReCaptchaService {
     };
 }
 
-export = ReCaptchaService;
+export default ReCaptchaService;

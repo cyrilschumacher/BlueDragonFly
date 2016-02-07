@@ -24,6 +24,8 @@
 import * as express from "express";
 import * as i18next from "i18next";
 import * as i18nextMiddleware from "i18next-express-middleware";
+import * as FilesystemBackend from "i18next-node-fs-backend";
+import * as sprintf from "i18next-sprintf-postprocessor";
 
 import bunyan from "../bunyan";
 import nconf from "../nconf";
@@ -36,7 +38,10 @@ export function initialize(app: express.Express) {
     bunyan.info("Initializes localization.");
 
     const options = nconf.get("i18next");
-    i18next.use(i18nextMiddleware.LanguageDetector).init(options);
+    i18next.use(i18nextMiddleware.LanguageDetector)
+        .use(FilesystemBackend)
+        .use(sprintf)
+        .init(options);
 
     app.use(i18nextMiddleware.handle(i18next));
 }

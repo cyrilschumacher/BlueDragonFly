@@ -86,4 +86,4 @@ class HtmlMailerService {
     };
 }
 
-export = HtmlMailerService;
+export default HtmlMailerService;

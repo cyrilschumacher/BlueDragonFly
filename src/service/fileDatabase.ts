@@ -76,4 +76,4 @@ class FileDatabaseService {
     };
 }
 
-export = FileDatabaseService;
+export default FileDatabaseService;

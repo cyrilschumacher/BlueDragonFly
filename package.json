@@ -24,6 +24,8 @@
     "helmet": "^1.0.1",
     "i18next": "^2.1.0",
     "i18next-express-middleware": "^0.2.0",
+    "i18next-node-fs-backend": "0.0.6",
+    "i18next-sprintf-postprocessor": "0.0.6",
     "jade": "^1.11.0",
     "juice": "^1.8.1",
     "nconf": "^0.8.2",
