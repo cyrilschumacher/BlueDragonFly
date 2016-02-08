@@ -21,44 +21,22 @@
  * SOFTWARE.
  */
 
-/// <reference path="../typings/tsd.d.ts"/>
+import bunyan from "../bunyan";
+import nconf from "../nconf";
 
 import * as express from "express";
-import * as helmet from "helmet";
-import * as bodyParser from "body-parser";
-import nconf from "./configuration/nconf";
 
-import expressValidator = require("express-validator");
+import timeout = require("connect-timeout");
 
-// Creates express application.
-const app = express();
+/**
+ * @summary Initializes "timeout" module.
+ * @param {Express} app The express application.
+ */
+export function initialize(app: express.Express) {
+    bunyan.info("Initializes 'timeout' module.");
 
-// Configures express application.
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-app.use(expressValidator());
-app.use(helmet());
-
-// Initializes 'timeout' module.
-import timeout = require("./configuration/handler/timeout");
-timeout.initialize(app);
-
-// Initializes 'compresion' module.
-import compresion = require("./configuration/handler/compression");
-compresion.initialize(app);
-
-// Initializes environment.
-import environment = require("./configuration/handler/environment");
-environment.initialize(app);
-
-// Initializes localization.
-import i18next = require("./configuration/handler/i18next");
-i18next.initialize(app);
-
-// Initializes routes.
-import route = require("./configuration/route");
-route.initialize(app);
-
-// Initializes startup.
-import startup = require("./configuration/startup");
-export = startup.initialize(app);
+    const time = <string> nconf.get("timeout:time");
+    const options = nconf.get("timeout:options");
+    const requestHandler = timeout(time, options);
+    app.use(requestHandler);
+}

@@ -1,24 +1,20 @@
 {
+    "bunyan": {
+        "name": "Blue DragonFly"
+    },
+    "compression": {
+
+    },
+    "express": {
+        "listen": 3005,
+        "uid": 0
+    },
     "expressBrute": {
         "options": {
             "freeRetries": 3,
             "minWait": 60000,
             "maxWait": 900000
         }
-    },
-    "bunyan": {
-        "name": "Blue DragonFly"
-    },
-    "express": {
-        "listen": 3005,
-        "uid": 0
-    },
-    "mail": {
-        "templateDir": "resource/template/mail/",
-        "from": "admin@test.com"
-    },
-    "memcachedstore": {
-        "host": "127.0.0.1"
     },
     "i18next": {
         "debug": false,
@@ -28,14 +24,25 @@
             "loadPath": "locale/{{ns}}-{{lng}}.json"
         }
     },
+    "mail": {
+        "templateDir": "resource/template/mail/",
+        "from": "admin@test.com"
+    },
+    "memcachedstore": {
+        "host": "127.0.0.1"
+    },
+    "nodemailer": {
+        "ignoreTLS": true,
+        "port": 1025
+    },
     "reCaptcha": {
         "secret": ""
     },
     "resume": {
         "path": "resource/resume/"
     },
-    "nodemailer": {
-        "ignoreTLS": true,
-        "port": 1025
+    "timeout": {
+        "time": "10s",
+        "options": {}
     }
 }

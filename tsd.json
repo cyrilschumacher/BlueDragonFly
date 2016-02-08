@@ -9,16 +9,16 @@
             "commit": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
         },
         "serve-static/serve-static.d.ts": {
-            "commit": "c393f8974d44840a6c9cc6d5b5c0188a8f05143d"
+            "commit": "3030a4be536b6530c06b80081f1333dc0de4d703"
         },
         "mime/mime.d.ts": {
-            "commit": "c393f8974d44840a6c9cc6d5b5c0188a8f05143d"
+            "commit": "3030a4be536b6530c06b80081f1333dc0de4d703"
         },
         "express/express.d.ts": {
-            "commit": "c393f8974d44840a6c9cc6d5b5c0188a8f05143d"
+            "commit": "3030a4be536b6530c06b80081f1333dc0de4d703"
         },
         "node/node.d.ts": {
-            "commit": "c393f8974d44840a6c9cc6d5b5c0188a8f05143d"
+            "commit": "3030a4be536b6530c06b80081f1333dc0de4d703"
         },
         "bunyan/bunyan.d.ts": {
             "commit": "e5a27ea95e47b95333784f1f0d590127b4e39a89"
@@ -70,6 +70,12 @@
         },
         "i18next-sprintf-postprocessor/i18next-sprintf-postprocessor.d.ts": {
             "commit": "c393f8974d44840a6c9cc6d5b5c0188a8f05143d"
+        },
+        "connect-timeout/connect-timeout.d.ts": {
+            "commit": "3030a4be536b6530c06b80081f1333dc0de4d703"
+        },
+        "compression/compression.d.ts": {
+            "commit": "3030a4be536b6530c06b80081f1333dc0de4d703"
         }
     }
 }

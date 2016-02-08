@@ -54,14 +54,14 @@ export default class ResumeController {
      * @param {Request}   request   The HTTP request.
      * @param {Response}  response  The HTTP response.
      */
-    public getEducationSection = (request: express.Request, response: express.Response): void|express.Response => {
+    public getEducationSection = (request: express.Request, response: express.Response): void => {
         this._fileDatabaseService.getRows("education", (error, files) => {
             if (error) {
                 const body = util.inspect(error);
-                return response.status(500).json(body);
+                response.status(500).json(body);
+            } else {
+                response.json(files);
             }
-
-            return response.json(files);
         });
     };
 
@@ -70,14 +70,14 @@ export default class ResumeController {
      * @param {Request}   request   The HTTP request.
      * @param {Response}  response  The HTTP response.
      */
-    public getExperienceSection = (request: express.Request, response: express.Response): void|express.Response => {
+    public getExperienceSection = (request: express.Request, response: express.Response): void => {
         this._fileDatabaseService.getRows("experience", (error, files) => {
             if (error) {
                 const body = util.inspect(error);
-                return response.status(500).json(body);
+                response.status(500).json(body);
+            } else {
+                response.json(files);
             }
-
-            return response.json(files);
         });
     };
 }
