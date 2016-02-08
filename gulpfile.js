@@ -28,7 +28,7 @@ function exec_copy() {
  * @param {Function} cb The callback.
  */
 function exec_typescript(cb) {
-    var source = [path.normalize(paths.source + '**/*.ts'), path.normalize('!' + paths.source + 'typing/**/*.ts')];
+    var source = path.normalize(paths.source + '**/*.ts');
     var options = tsconfig.compilerOptions;
 
     gulp.src(source)
@@ -43,8 +43,8 @@ function exec_typescript(cb) {
  * @summary Watches files.
  */
 function watch() {
-    gulp.watch(['src/**/*.ts', '!src/typing/**/*.ts'], exec_typescript);
-    gulp.watch(['src/**/*.json', 'src/**/*.scss', 'src/**/*.jade'], exec_copy);
+    gulp.watch([paths.source + '**/*.ts'], exec_typescript);
+    gulp.watch([paths.source + '**/*.json', paths.source + '**/*.scss', paths.source + '**/*.jade'], exec_copy);
 }
 
 /**
@@ -52,8 +52,9 @@ function watch() {
  * @param {Function} cb The callback.
  */
 function exec_tslint(cb) {
-    var source = [path.normalize(paths.source + '**/*.ts'), path.normalize('!' + paths.source + 'typing/**/*.ts')];
+    var source = path.normalize(paths.source + '**/*.ts');
     gulp.src(source)
+        .pipe(plumber())
         .pipe(tslint())
         .pipe(tslint.report('verbose'));
 

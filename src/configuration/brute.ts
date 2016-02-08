@@ -25,14 +25,14 @@ import * as express from "express";
 import * as ExpressBrute from "express-brute";
 import MemcachedStore from "express-brute-memcached";
 
-import bunyan from "../bunyan";
-import nconf from "../nconf";
+import bunyan from "./bunyan";
+import nconf from "./nconf";
 
 /**
  * @summary Gets the ExpressBrute store.
  * @return {MemoryStore|MemcachedStore} The store.
  */
-function _getExpressBruteStore() {
+function _getExpressBruteStore(): any {
     if (process.env.NODE_ENV === "production") {
         bunyan.info("Using MemcachedStore for brute-force protection middleware.");
 
@@ -40,19 +40,23 @@ function _getExpressBruteStore() {
         return new MemcachedStore(hosts);
     }
 
-    bunyan.info("Using in-memory store for brute-force protection middleware.");
+    bunyan.warn("Using in-memory store for brute-force protection middleware.");
     return new ExpressBrute.MemoryStore();
 }
 
 /**
- * @summary Initializes environment.
- * @param {Express} app The express application.
+ * @summary Initializes brute.
+ * @return {ExpressBrute} The brute.
  */
-export function initialize(app: express.Express) {
+function initialize(): express.RequestHandler {
     bunyan.info("Initializes brute-force protection middleware.");
 
     const store = _getExpressBruteStore();
     const options = nconf.get("expressBrute:options");
-    const brute = new ExpressBrute(store, options);
-    app.use(brute.prevent);
+    const brute = <ExpressBrute> new ExpressBrute(store, options);
+
+    return brute.prevent;
 }
+
+const brute = initialize();
+export default brute;

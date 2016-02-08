@@ -10,10 +10,11 @@
         "name": "Blue DragonFly"
     },
     "express": {
-        "listen": 3005
+        "listen": 3005,
+        "uid": 0
     },
     "mail": {
-        "templateDir": "dist/resource/template/mail/",
+        "templateDir": "resource/template/mail/",
         "from": "admin@test.com"
     },
     "memcachedstore": {
@@ -29,6 +30,9 @@
     },
     "reCaptcha": {
         "secret": ""
+    },
+    "resume": {
+        "path": "resource/resume/"
     },
     "nodemailer": {
         "ignoreTLS": true,

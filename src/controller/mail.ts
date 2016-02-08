@@ -22,9 +22,10 @@
  */
 
 import * as express from "express";
+import * as util from "util";
+
 import bunyan from "../configuration/bunyan";
 import nconf from "../configuration/nconf";
-import * as util from "util";
 import transport from "../configuration/transport";
 
 import MailModel from "../model/request/mail";
@@ -85,7 +86,7 @@ export default class MailController {
      * @param {Request}   request   The HTTP request.
      * @param {Response}  response  The HTTP response.
      */
-    public send = (request: express.Request, response: express.Response): express.Response => {
+    public send = (request: express.Request, response: express.Response): void|express.Response => {
         let errors = this._assertMailInformation(request);
         if (errors) {
             const body = util.inspect(errors);
@@ -93,7 +94,7 @@ export default class MailController {
         }
 
         const model = new MailModel(request);
-        this._reCaptchaService.verifyAsync(model.captcha, (success: boolean) => {
+        this._reCaptchaService.verifyAsync(model.captcha, (success: boolean): void|express.Response => {
             if (!success) {
                 const body = util.inspect(errors);
                 return response.status(400).json(body);

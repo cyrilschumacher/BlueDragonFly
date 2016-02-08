@@ -21,17 +21,31 @@
  * SOFTWARE.
  */
 
-import bunyan from "./bunyan";
 import * as express from "express";
+import bunyan from "./bunyan";
 import nconf from "./nconf";
+
+/**
+ * @summary Sets the UID.
+ */
+function _setUID() {
+    if (process.setuid) {
+        const uid = <number> nconf.get("express:uid");
+        if (uid) {
+            process.setuid(uid);
+            bunyan.info(`Server's UID is now ${process.getuid()}.`);
+        }
+    }
+}
 
 /**
  * @summary Initializes the express startup.
  * @param {Express} app The express application.
  */
 export function initialize(app: express.Express) {
-    const port = nconf.get("express:listen");
+    const port = <number> nconf.get("express:listen");
     return app.listen(port, () => {
-        bunyan.info("Started Express server listening on port %d in %s mode.", port, app.settings.env);
+        bunyan.info(`Started Express server listening on port ${port} in ${app.settings.env} mode.`);
+        _setUID();
     });
 }

@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node dist/cluster.js",
     "test": "mocha ./test/**/*.js",
-    "coverage": "istanbul cover _mocha -t 10000 -- -R spec ./test/**/*.js"
+    "coverage": "istanbul cover _mocha -- -R spec ./test/**/*.js"
   },
   "author": "Cyril Schumacher",
   "license": "MIT",
@@ -36,7 +36,6 @@
     "chai": "^3.4.1",
     "coveralls": "^2.11.6",
     "gulp": "^3.9.0",
-    "gulp-express": "^0.3.5",
     "gulp-plumber": "^1.0.1",
     "gulp-tslint": "^4.2.1",
     "gulp-typescript": "^2.10.0",

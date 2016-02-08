@@ -25,40 +25,53 @@ import * as cluster from "cluster";
 import * as os from "os";
 
 /**
+ * @summary Creates application forks.
+ */
+function createForks(): void {
+    const cpus = os.cpus();
+    const numWorkers = cpus.length;
+
+    console.log(`Master cluster setting up ${numWorkers} workers...`);
+    for (let i = 0; i < numWorkers; i++) {
+        cluster.fork();
+    }
+}
+
+/**
+ * @summary Creates handlers for to manage cluster.
+ */
+function createrHandler(): void {
+    if (cluster.isMaster) {
+        createForks();
+
+        cluster.on("exit", onExit);
+        cluster.on("online", onOnline);
+    }
+}
+
+/**
  * @summary Raises when the worker is exited.
  * @param {Worker} worker The worker.
  * @param {number} code   The code.
  * @param {string} signal The signal.
  */
-function onExit(worker: cluster.Worker, code: number, signal: string) {
-    console.log("worker " + worker.process.pid + " died");
+function onExit(worker: cluster.Worker, code: number, signal: string): void {
+    if (signal) {
+        console.warn(`worker ${worker.process.pid} was killed by signal: ${signal}`);
+    } else if (code !== 0) {
+        console.error(`worker ${worker.process.pid} exited with error code: ${code}`);
+    } else {
+        console.log(`worker ${worker.process.pid} success!`);
+    }
 }
 
 /**
  * @summary Raises when the worker is online.
  * @param {Worker} worker The worker.
  */
-function onOnline(worker: cluster.Worker) {
-    console.log("Worker " + worker.process.pid + " is online");
+function onOnline(worker: cluster.Worker): void {
+    console.log(`worker ${worker.process.pid} is online`);
 }
 
-/**
- * @summary Creates application fork.
- */
-function createFork() {
-    const cpus = os.cpus();
-    const numWorkers = cpus.length;
-
-    console.log("Master cluster setting up " + numWorkers + " workers...");
-    for (let i = 0; i < numWorkers; i++) {
-        cluster.fork();
-    }
-}
-
-if (cluster.isMaster) {
-    createFork();
-    cluster.on("exit", onExit);
-    cluster.on("online", onOnline);
-} else {
-    require("./app.js");
-}
+createrHandler();
+require("./app.js");

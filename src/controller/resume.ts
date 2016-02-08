@@ -26,6 +26,7 @@ import * as fs from "fs";
 import * as util from "util";
 import * as path from "path";
 
+import nconf from "../configuration/nconf";
 import FileDatabaseService from "../service/fileDatabase";
 
 /**
@@ -44,7 +45,8 @@ export default class ResumeController {
      * @constructor
      */
     public constructor() {
-        this._fileDatabaseService = new FileDatabaseService("dist/resource/resume/", fs, path);
+        const databaseDir = <string> nconf.get("resume:path");
+        this._fileDatabaseService = new FileDatabaseService(databaseDir, fs, path);
     }
 
     /**
@@ -52,14 +54,14 @@ export default class ResumeController {
      * @param {Request}   request   The HTTP request.
      * @param {Response}  response  The HTTP response.
      */
-    public getEducationSection = (request: express.Request, response: express.Response): void => {
+    public getEducationSection = (request: express.Request, response: express.Response): void|express.Response => {
         this._fileDatabaseService.getRows("education", (error, files) => {
             if (error) {
                 const body = util.inspect(error);
                 return response.status(500).json(body);
             }
 
-            response.json(files);
+            return response.json(files);
         });
     };
 
@@ -68,14 +70,14 @@ export default class ResumeController {
      * @param {Request}   request   The HTTP request.
      * @param {Response}  response  The HTTP response.
      */
-    public getExperienceSection = (request: express.Request, response: express.Response): void => {
+    public getExperienceSection = (request: express.Request, response: express.Response): void|express.Response => {
         this._fileDatabaseService.getRows("experience", (error, files) => {
             if (error) {
                 const body = util.inspect(error);
                 return response.status(500).json(body);
             }
 
-            response.json(files);
+            return response.json(files);
         });
     };
 }

@@ -23,6 +23,7 @@
 
 import * as express from "express";
 import bunyan from "./bunyan";
+import brute from "./brute";
 
 import IndexController from "../controller/index";
 import MailController from "../controller/mail";
@@ -37,7 +38,7 @@ export function initialize(app: express.Express) {
 
     // Mail.
     const mailController = new MailController();
-    app.post("/mail/send", mailController.send);
+    app.post("/mail", brute, mailController.send);
 
     // Index.
     const indexController = new IndexController();

@@ -41,9 +41,6 @@ app.use(helmet());
 import environment = require("./configuration/handler/environment");
 environment.initialize(app);
 
-import brute = require("./configuration/handler/brute");
-brute.initialize(app);
-
 // Initializes localization.
 import i18next = require("./configuration/handler/i18next");
 i18next.initialize(app);

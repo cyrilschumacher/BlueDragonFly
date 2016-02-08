@@ -24,7 +24,6 @@
 import * as http from "http";
 import * as https from "https";
 import nconf from "../configuration/nconf";
-import * as util from "util";
 
 /**
  * @summary Service for Google ReCaptcha.
@@ -58,11 +57,10 @@ class ReCaptchaService {
      * @param {Function}    callback    The callback.
      */
     public verifyAsync = (response: string, callback: (success: boolean) => void): void => {
-        const ORIGINAL_URL = "https://www.google.com/recaptcha/api/siteverify?secret=%s&response=%s";
         const secret = nconf.get("reCaptcha:secret");
-        const URL = util.format(ORIGINAL_URL, secret, response);
+        const url = `https://www.google.com/recaptcha/api/siteverify?secret=${secret}&response=${response}`;
 
-        https.get(URL, res => this._verify(res, callback));
+        https.get(url, res => this._verify(res, callback));
     };
 }
 
