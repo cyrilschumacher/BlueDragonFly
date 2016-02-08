@@ -10,7 +10,7 @@ var FileDatabaseService = require('../../dist/service/fileDatabase');
 
 describe('FileDatabaseService', function() {
     // Global variables.
-    var fileDatabase = new FileDatabaseService('test/resources/database/', fs, path);
+    var fileDatabase = new FileDatabaseService.default('test/resources/database/', fs, path);
 
     it('should return a error', function(done) {
         fileDatabase.getRows('notfound', function(error, files) {

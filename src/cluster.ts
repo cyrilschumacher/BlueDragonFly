@@ -21,6 +21,8 @@
  * SOFTWARE.
  */
 
+"use strict";
+
 import * as cluster from "cluster";
 import * as os from "os";
 

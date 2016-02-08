@@ -30,6 +30,8 @@ import nconf from "./configuration/nconf";
 
 import expressValidator = require("express-validator");
 
+"use strict";
+
 // Creates express application.
 const app = express();
 

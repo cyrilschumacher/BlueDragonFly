@@ -23,10 +23,9 @@
 
 import bunyan from "../bunyan";
 import nconf from "../nconf";
+import timeout from "connect-timeout";
 
 import * as express from "express";
-
-import timeout = require("connect-timeout");
 
 /**
  * @summary Initializes "timeout" module.

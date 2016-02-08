@@ -21,6 +21,8 @@
  * SOFTWARE.
  */
 
+"use strict";
+
 import * as http from "http";
 import * as https from "https";
 import nconf from "../configuration/nconf";

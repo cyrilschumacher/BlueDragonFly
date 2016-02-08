@@ -8,7 +8,7 @@ var ReCaptchaService = require('../../dist/service/reCaptcha');
 
 describe('ReCaptchaService', function() {
     // Global variables.
-    var reCaptcha = new ReCaptchaService();
+    var reCaptcha = new ReCaptchaService.default();
 
     /**
      * @summary Runs before each test.

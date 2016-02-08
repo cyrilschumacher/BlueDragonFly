@@ -21,6 +21,8 @@
  * SOFTWARE.
  */
 
+"use strict";
+
 import * as express from "express";
 import * as fs from "fs";
 import * as util from "util";
@@ -33,7 +35,7 @@ import FileDatabaseService from "../service/fileDatabase";
  * @summary Controller for mail.
  * @class
  */
-export default class ResumeController {
+class ResumeController {
     /**
      * @summary Service for manage File database.
      * @type {FileDatabaseService}
@@ -80,4 +82,22 @@ export default class ResumeController {
             }
         });
     };
+
+    /**
+     * @summary Gets the skills section.
+     * @param {Request}   request   The HTTP request.
+     * @param {Response}  response  The HTTP response.
+     */
+    public getSkillsSection = (request: express.Request, response: express.Response): void => {
+        this._fileDatabaseService.getRows("skills", (error, files) => {
+            if (error) {
+                const body = util.inspect(error);
+                response.status(500).json(body);
+            } else {
+                response.json(files);
+            }
+        });
+    };
 }
+
+export default ResumeController;

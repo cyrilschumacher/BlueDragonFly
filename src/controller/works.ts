@@ -21,39 +21,29 @@
  * SOFTWARE.
  */
 
-import * as express from "express";
-import bunyan from "./bunyan";
-import brute from "./brute";
+"use strict";
 
-import IndexController from "../controller/index";
-import MailController from "../controller/mail";
-import ResumeController from "../controller/resume";
-import WorksController from "../controller/works";
+import * as express from "express";
 
 /**
- * @summary Initializes routes.
- * @param {Express} app The express application.
+ * @summary Controller for works.
+ * @class
  */
-export function initialize(app: express.Express) {
-    bunyan.info("Initializes Express routes.");
+class WorksController {
+    /**
+     * @summary Constructor.
+     * @constructor
+     */
+    public constructor() {
+    }
 
-    // Mail.
-    const mailController = new MailController();
-    app.post("/mail", brute, mailController.send);
-
-    // Index.
-    const indexController = new IndexController();
-    app.get("/", indexController.default);
-
-    // Resume.
-    const resumeController = new ResumeController();
-    app.get("/resume/education", resumeController.getEducationSection);
-    app.get("/resume/experience", resumeController.getExperienceSection);
-
-    // Works.
-    const worksController = new WorksController();
-    app.get("/works", worksController.getAll);
-
-    // Error.
-    app.use(indexController.notFound);
+    /**
+     * @summary Gets all works.
+     * @param {Request}   request   The HTTP request.
+     * @param {Response}  response  The HTTP response.
+     */
+    public getAll = (request: express.Request, response: express.Response): void => {
+    }
 }
+
+export default WorksController;

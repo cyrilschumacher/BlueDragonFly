@@ -6,7 +6,7 @@ var request = require('supertest');
 var HtmlMailerService = require('../../dist/service/htmlMailer');
 
 /* Global variables */
-var htmlMailer = new HtmlMailerService(),
+var htmlMailer = new HtmlMailerService.default(),
     maildev = new MailDev(),
     transport;
 

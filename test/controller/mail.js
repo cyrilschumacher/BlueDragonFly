@@ -41,7 +41,7 @@ describe('MailController', function() {
     it('should return a error due to the absence of the fields "emailAddress"', function(done) {
         var body = 'name=Jean+Dupond&message=Hello%2Cworld!&g-recaptcha-response=test&subject=This+is+a+test';
         request(app)
-            .post('/mail/send/')
+            .post('/mail')
             .type('form')
             .send(body)
             .expect(400, done);
@@ -50,7 +50,7 @@ describe('MailController', function() {
     it('should return a error due to the absence of the fields "g-recaptcha-response"', function(done) {
         var body = 'name=Jean+Dupond&emailAddress=jean.dupond@test.com&message=Hello%2Cworld!&subject=This+is+a+test';
         request(app)
-            .post('/mail/send/')
+            .post('/mail')
             .type('form')
             .send(body)
             .expect(400, done);
@@ -59,7 +59,7 @@ describe('MailController', function() {
     it('should send a email', function(done) {
         var body = 'name=Jean+Dupond&emailAddress=jean.dupond@test.com&message=Hello%2Cworld!&g-recaptcha-response=test&subject=This+is+a+test';
         request(app)
-            .post('/mail/send/')
+            .post('/mail')
             .type('form')
             .send(body)
             .expect(200, done);

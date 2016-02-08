@@ -21,6 +21,8 @@
  * SOFTWARE.
  */
 
+"use strict";
+
 import * as express from "express";
 import * as util from "util";
 
@@ -36,7 +38,7 @@ import ReCaptchaService from "../service/reCaptcha";
  * @summary Controller for mail.
  * @class
  */
-export default class MailController {
+class MailController {
     /**
      * @summary HTML mailer service.
      * @type {HtmlMailerService}
@@ -68,7 +70,7 @@ export default class MailController {
      * @return  {any}                 The errors encountered.
      */
     private _assertMailInformation = (request: express.Request): any => {
-        const i18n = request["i18n"];
+        const i18n = request.i18n;
 
         request.checkBody("g-recaptcha-response", i18n.t("assert.mail.captcha.isEmpty")).notEmpty();
         request.checkBody("name", i18n.t("assert.mail.name.invalidLength")).optional().len(0, 70);
@@ -113,3 +115,5 @@ export default class MailController {
         });
     };
 }
+
+export default MailController;

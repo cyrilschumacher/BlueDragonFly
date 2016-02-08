@@ -8,7 +8,7 @@
         "noImplicitReturns": true,
         "preserveConstEnums": true,
         "removeComments": true,
-        "target": "ES5"
+        "target": "ES6"
     },
     "filesGlob": [
         "./src/**/*.ts",
@@ -31,6 +31,7 @@
         "./src/controller/index.ts",
         "./src/controller/mail.ts",
         "./src/controller/resume.ts",
+        "./src/controller/works.ts",
         "./src/model/request/mail.ts",
         "./src/service/fileDatabase.ts",
         "./src/service/htmlMailer.ts",

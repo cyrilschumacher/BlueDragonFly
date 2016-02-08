@@ -21,6 +21,8 @@
  * SOFTWARE.
  */
 
+"use strict";
+
 import * as async from "async";
 
 /**

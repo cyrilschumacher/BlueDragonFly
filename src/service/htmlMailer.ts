@@ -21,6 +21,8 @@
  * SOFTWARE.
  */
 
+"use strict";
+
 import * as EmailTemplates from "email-templates";
 import * as nodemailer from "nodemailer";
 

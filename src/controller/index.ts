@@ -21,13 +21,15 @@
  * SOFTWARE.
  */
 
+"use strict";
+
 import * as express from "express";
 
 /**
  * @summary Controller for index.
  * @class
  */
-export default class IndexController {
+class IndexController {
     /**
      * @summary Default page.
      * @param request   The HTTP request.
@@ -43,10 +45,12 @@ export default class IndexController {
      * @param response  The HTTP response.
      */
     public notFound(request: express.Request, response: express.Response): void {
-        const i18n = request["i18n"];
+        const i18n = request.i18n;
         const body = {
             error: i18n.t("error.notFound")
         };
         response.status(404).json(body);
     };
 }
+
+export default IndexController;
