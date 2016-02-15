@@ -57,7 +57,8 @@ class ResumeController {
      * @param {Response}  response  The HTTP response.
      */
     public getEducationSection = (request: express.Request, response: express.Response): void => {
-        this._fileDatabaseService.getRows("education", (error, files) => {
+        const tableName = <string> nconf.get("resume:table:education");
+        this._fileDatabaseService.getRowsAsync(tableName, (error, files) => {
             if (error) {
                 const body = util.inspect(error);
                 response.status(500).json(body);
@@ -73,7 +74,8 @@ class ResumeController {
      * @param {Response}  response  The HTTP response.
      */
     public getExperienceSection = (request: express.Request, response: express.Response): void => {
-        this._fileDatabaseService.getRows("experience", (error, files) => {
+        const tableName = <string> nconf.get("resume:table:experience");
+        this._fileDatabaseService.getRowsAsync(tableName, (error, files) => {
             if (error) {
                 const body = util.inspect(error);
                 response.status(500).json(body);
@@ -89,7 +91,8 @@ class ResumeController {
      * @param {Response}  response  The HTTP response.
      */
     public getSkillsSection = (request: express.Request, response: express.Response): void => {
-        this._fileDatabaseService.getRows("skills", (error, files) => {
+        const tableName = <string> nconf.get("resume:table:skills");
+        this._fileDatabaseService.getRowsAsync(tableName, (error, files) => {
             if (error) {
                 const body = util.inspect(error);
                 response.status(500).json(body);

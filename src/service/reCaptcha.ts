@@ -27,30 +27,50 @@ import * as http from "http";
 import * as https from "https";
 import nconf from "../configuration/nconf";
 
+type VerifyCallback = (success: boolean) => void;
+
 /**
  * @summary Service for Google ReCaptcha.
  * @class
  */
 class ReCaptchaService {
     /**
+     * @summary Fires when there will be no more data to read.
+     * @private
+     * @param {string}   data        The data.
+     * @param {Function} callback    The callback.
+     */
+    private _onEnded = (data: string, callback: VerifyCallback): void => {
+        try {
+            const parsedData = JSON.parse(data);
+            callback(parsedData.success);
+        } catch (e) {
+            callback(false);
+        }
+    }
+
+    /**
+    * @summary Fires when data is available.
+    * @private
+    * @param {Buffer}   chunk   The chunk of data.
+    * @param {string}   data    The data.
+     *
+     */
+    private _onReaded = (chunk: Buffer, data: string): void => {
+        data += chunk.toString();
+    }
+
+    /**
      * @summary Verify if the response of captcha is correct.
+     * @private
      * @param {string}      response    The HTTP response.
      * @param {Function}    callback    The callback.
      */
-    private _verify = (response: http.IncomingMessage, callback: (success: boolean) => void): void => {
+    private _verify = (response: http.IncomingMessage, callback: VerifyCallback): void => {
         let data = "";
-        response.on("data", function(chunk: any) {
-            data += chunk.toString();
-        });
 
-        response.on("end", function() {
-            try {
-                const parsedData = JSON.parse(data);
-                callback(parsedData.success);
-            } catch (e) {
-                callback(false);
-            }
-        });
+        response.on("data", (chunk: Buffer) => this._onReaded(chunk, data));
+        response.on("end", () => this._onEnded(data, callback));
     };
 
     /**
@@ -58,7 +78,7 @@ class ReCaptchaService {
      * @param {string}      response    The captcha response.
      * @param {Function}    callback    The callback.
      */
-    public verifyAsync = (response: string, callback: (success: boolean) => void): void => {
+    public verifyAsync = (response: string, callback: VerifyCallback): void => {
         const secret = nconf.get("reCaptcha:secret");
         const url = `https://www.google.com/recaptcha/api/siteverify?secret=${secret}&response=${response}`;
 

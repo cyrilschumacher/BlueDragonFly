@@ -2,12 +2,10 @@
     "bunyan": {
         "name": "Blue DragonFly"
     },
-    "compression": {
-
-    },
-    "express": {
-        "listen": 3005,
-        "uid": 0
+    "compression": {},
+    "cors": {
+        "origin": "*",
+        "methods": "GET,POST"
     },
     "expressBrute": {
         "options": {
@@ -39,7 +37,20 @@
         "secret": ""
     },
     "resume": {
-        "path": "resource/resume/"
+        "path": "resource/resume/",
+        "table": {
+            "education": "education",
+            "experience": "experience",
+            "skills": "skills"
+        }
+    },
+    "server": {
+        "listen": 3005,
+        "uid": 0,
+        "ssl": {
+            "cert": "resource/ssl/localhost.crt",
+            "key": "resource/ssl/localhost.key"
+        }
     },
     "timeout": {
         "time": "10s",

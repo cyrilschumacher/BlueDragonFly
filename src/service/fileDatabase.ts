@@ -44,7 +44,7 @@ class FileDatabaseService {
      * @param {string}      tableName The table name.
      * @param {Function}    callback  The callback.
      */
-    public getRow = (tableName: string, id: string, callback: (err: any, row?: Object) => void): void => {
+    public getRowAsync = (tableName: string, id: string, callback: (err: any, row?: Object) => void): void => {
         const tablePath = this._path.join(this._databaseDir, tableName, id);
         const path = this._path.normalize(tablePath);
 
@@ -56,7 +56,7 @@ class FileDatabaseService {
      * @param {string}      tableName The table name.
      * @param {Function}    callback  The callback.
      */
-    public getRows = (tableName: string, callback: (err: any, rows?: Array<Object>) => void): void => {
+    public getRowsAsync = (tableName: string, callback: (error: any, rows?: Array<Object>) => void): void => {
         const tablePath = this._path.join(this._databaseDir, tableName);
         const path = this._path.normalize(tablePath);
 

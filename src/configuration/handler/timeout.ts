@@ -21,9 +21,11 @@
  * SOFTWARE.
  */
 
+///<reference path="../../../typings/connect-timeout/connect-timeout.d.ts"/>
+
 import bunyan from "../bunyan";
 import nconf from "../nconf";
-import timeout from "connect-timeout";
+import * as timeout from "connect-timeout";
 
 import * as express from "express";
 
