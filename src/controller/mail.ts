@@ -30,8 +30,9 @@ import bunyan from "../configuration/bunyan";
 import nconf from "../configuration/nconf";
 import transport from "../configuration/transport";
 
-import MailModel from "../model/request/mail";
+import ErrorResponseModel from "../model/response/error";
 import HtmlMailerService from "../service/htmlMailer";
+import MailModel from "../model/request/mail";
 import ReCaptchaService from "../service/reCaptcha";
 
 /**
@@ -54,12 +55,17 @@ class MailController {
     /**
      * @summary Constructor.
      * @constructor
+     * @param   {HtmlMailerService} htmlMailerService   The HTML mailer.
      */
-    public constructor() {
-        const from = nconf.get("mail:from");
-        const templateDir = nconf.get("mail:templateDir");
+    public constructor(htmlMailerService?: HtmlMailerService) {
+        if (htmlMailerService) {
+            this._htmlMailerService = htmlMailerService;
+        } else {
+            const from = nconf.get("mail:from");
+            const templateDir = nconf.get("mail:templateDir");
+            this._htmlMailerService = new HtmlMailerService(transport, from, templateDir);
+        }
 
-        this._htmlMailerService = new HtmlMailerService(transport, from, templateDir);
         this._reCaptchaService = new ReCaptchaService();
     }
 
@@ -89,6 +95,7 @@ class MailController {
      * @param {Response}  response  The HTTP response.
      */
     public send = (request: express.Request, response: express.Response): void|express.Response => {
+        const i18n = request.i18n;
         let errors = this._assertMailInformation(request);
         if (errors) {
             const body = util.inspect(errors);
@@ -98,16 +105,16 @@ class MailController {
         const model = new MailModel(request);
         this._reCaptchaService.verifyAsync(model.captcha, (success: boolean): void|express.Response => {
             if (!success) {
-                const body = util.inspect(errors);
-                return response.status(400).json(body);
+                const model = new ErrorResponseModel(i18n.t("error.captchaInvald"));
+                return response.status(400).json(model);
             }
 
             this._htmlMailerService.sendAsync(model.emailAddress, model.subject, model, sendErrors => {
-                if (errors) {
-                    bunyan.error(errors);
+                if (sendErrors) {
+                    bunyan.error(sendErrors);
 
-                    const body = util.inspect(sendErrors);
-                    return response.status(500).json(body);
+                    const model = new ErrorResponseModel(i18n.t("error.mailNotSent"));
+                    return response.status(500).json(model);
                 }
 
                 return response.end();

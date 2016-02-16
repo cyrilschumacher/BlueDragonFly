@@ -2,11 +2,6 @@
     "bunyan": {
         "name": "Blue DragonFly"
     },
-    "compression": {},
-    "cors": {
-        "origin": "*",
-        "methods": "GET,POST"
-    },
     "expressBrute": {
         "options": {
             "freeRetries": 3,
@@ -14,12 +9,23 @@
             "maxWait": 900000
         }
     },
-    "i18next": {
-        "debug": false,
-        "dynamicLoad": true,
-        "fallbackLng": "en",
-        "backend": {
-            "loadPath": "locale/{{ns}}-{{lng}}.json"
+    "handler": {
+        "compression": {},
+        "cors": {
+            "origin": "*",
+            "methods": "GET,POST"
+        },
+        "i18next": {
+            "debug": false,
+            "dynamicLoad": true,
+            "fallbackLng": "en",
+            "backend": {
+                "loadPath": "locale/{{ns}}-{{lng}}.json"
+            }
+        },
+        "timeout": {
+            "time": "10s",
+            "options": {}
         }
     },
     "mail": {
@@ -52,8 +58,10 @@
             "key": "resource/ssl/localhost.key"
         }
     },
-    "timeout": {
-        "time": "10s",
-        "options": {}
+    "settings": {
+        "view": {
+            "engine": "jade",
+            "path": "./resource/view/"
+        }
     }
 }

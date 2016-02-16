@@ -44,11 +44,11 @@ function _initializeDevelopmentEnvironment(app: express.Express) {
 }
 
 /**
- * @summary Initializes environment.
+ * @summary Initializes "errorHandler" handler.
  * @param {Express} app The express application.
  */
 export function initialize(app: express.Express) {
-    bunyan.info("Initializes Express environment.");
+    bunyan.info("Initializes 'errorHandler' handler.");
 
     const env = process.env.NODE_ENV || "development";
     if (env === "production") {

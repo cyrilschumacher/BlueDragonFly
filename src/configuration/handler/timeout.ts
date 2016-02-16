@@ -30,14 +30,14 @@ import * as timeout from "connect-timeout";
 import * as express from "express";
 
 /**
- * @summary Initializes "timeout" module.
+ * @summary Initializes "timeout" handler.
  * @param {Express} app The express application.
  */
 export function initialize(app: express.Express) {
-    bunyan.info("Initializes 'timeout' module.");
+    bunyan.info("Initializes 'timeout' handler.");
 
-    const time = <string> nconf.get("timeout:time");
-    const options = nconf.get("timeout:options");
+    const time = <string> nconf.get("handler:timeout:time");
+    const options = nconf.get("handler:timeout:options");
     const requestHandler = timeout(time, options);
     app.use(requestHandler);
 }

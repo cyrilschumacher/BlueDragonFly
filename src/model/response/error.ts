@@ -23,33 +23,19 @@
 
 "use strict";
 
-import * as express from "express";
-import ErrorResponseModel from "../model/response/error";
-
 /**
- * @summary Controller for index.
+ * @summary Represents the response for the error.
  * @class
  */
-class IndexController {
+class ErrorResponseModel {
     /**
-     * @summary Default page.
-     * @param request   The HTTP request.
-     * @param response  The HTTP response.
+     * @summary Constructor.
+     * @constructor
+     * @param {string}   error   The error message.
+     * @param {number}   errno   The error code.
      */
-    public default(request: express.Request, response: express.Response): void {
-        response.render("index");
-    };
-
-    /**
-     * @summary Not found page.
-     * @param request   The HTTP request.
-     * @param response  The HTTP response.
-     */
-    public notFound(request: express.Request, response: express.Response): void {
-        const i18n = request.i18n;
-        const model = new ErrorResponseModel(i18n.t("error.notFound"));
-        response.status(404).json(model);
-    };
+    public constructor(public error: string, public errno?: number) {
+    }
 }
 
-export default IndexController;
+export default ErrorResponseModel;

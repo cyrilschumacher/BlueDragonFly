@@ -32,6 +32,7 @@ import * as async from "async";
 class FileDatabaseService {
     /**
      * @summary Constructor.
+     * @constructor
      * @param {string}  _databaseDir    The database directory.
      * @param {any}     _fileSystem     The file system.
      * @param {any}     _path           The path.

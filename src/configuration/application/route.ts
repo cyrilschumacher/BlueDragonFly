@@ -22,19 +22,19 @@
  */
 
 import * as express from "express";
-import bunyan from "./bunyan";
-import brute from "./brute";
+import bunyan from "../bunyan";
+import brute from "../brute";
 
-import IndexController from "../controller/index";
-import MailController from "../controller/mail";
-import ResumeController from "../controller/resume";
-import WorksController from "../controller/works";
+import IndexController from "../../controller/index";
+import MailController from "../../controller/mail";
+import ResumeController from "../../controller/resume";
+import WorksController from "../../controller/works";
 
 /**
  * @summary Initializes routes.
  * @param {Express} app The express application.
  */
-export function initialize(app: express.Express) {
+export default function initialize(app: express.Express) {
     bunyan.info("Initializes Express routes.");
 
     // Mail.

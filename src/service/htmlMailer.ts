@@ -39,6 +39,7 @@ class HtmlMailerService {
 
     /**
      * @summary Constructor.
+     * @constructor
      * @param (Transporter) _transporter        The transporter.
      * @param (string)      _from               The recipient.
      * @param (string)      templateDirectory   The template directory.

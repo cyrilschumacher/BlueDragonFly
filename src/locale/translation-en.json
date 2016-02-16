@@ -21,6 +21,10 @@
         }
     },
     "error": {
-        "notFound": "Not found"
+        "captchaInvald": "Le code du captcha est invalide.",
+        "mailNotSent": "A error is occured when sending mail.",
+        "noResumeSection": "No resume section exists.",
+        "notFound": "The requested service is not found.",
+        "unknown": "A unknown error is occured."
     }
 }

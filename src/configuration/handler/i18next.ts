@@ -31,13 +31,13 @@ import bunyan from "../bunyan";
 import nconf from "../nconf";
 
 /**
- * @summary Initializes i18next.
+ * @summary Initializes "i18next" handler.
  * @param {Express} app The express application.
  */
 export function initialize(app: express.Express) {
-    bunyan.info("Initializes localization.");
+    bunyan.info("Initializes 'i18next' handler.");
 
-    const options = nconf.get("i18next");
+    const options = nconf.get("handler:i18next");
     i18next.use(i18nextMiddleware.LanguageDetector)
         .use(FilesystemBackend)
         .use(sprintf)

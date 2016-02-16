@@ -22,33 +22,19 @@
  */
 
 import * as express from "express";
-import * as fs from "fs";
-import * as http2 from "http2";
-import bunyan from "./bunyan";
-import nconf from "./nconf";
+
+import bunyan from "../bunyan";
+import nconf from "../nconf";
 
 /**
- * @summary Sets the UID.
- */
-function _setUID() {
-    if (process.setuid) {
-        const uid = <number> nconf.get("express:uid");
-        if (uid) {
-            process.setuid(uid);
-            bunyan.info(`Server's UID is now ${process.getuid() }.`);
-        }
-    }
-}
-
-/**
- * @summary Initializes the express startup.
+ * @summary Initializes view engine.
  * @param {Express} app The express application.
  */
 export function initialize(app: express.Express) {
-    const port = <number> nconf.get("server:listen");
+    bunyan.info("Initializes view engine.");
 
-    return app.listen(port, () => {
-         bunyan.info(`Started Express server listening on port ${port} in ${app.settings.env} mode.`);
-         _setUID();
-    });
+    const engine = <string> nconf.get("settings:view:engine");
+    const path = <string> nconf.get("settings:view:path");
+    app.set("view engine", engine);
+    app.set("views", path);
 }

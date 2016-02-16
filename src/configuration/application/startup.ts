@@ -21,35 +21,33 @@
  * SOFTWARE.
  */
 
-"use strict";
-
 import * as express from "express";
-import ErrorResponseModel from "../model/response/error";
+import * as fs from "fs";
+import bunyan from "../bunyan";
+import nconf from "../nconf";
 
 /**
- * @summary Controller for index.
- * @class
+ * @summary Sets the UID.
  */
-class IndexController {
-    /**
-     * @summary Default page.
-     * @param request   The HTTP request.
-     * @param response  The HTTP response.
-     */
-    public default(request: express.Request, response: express.Response): void {
-        response.render("index");
-    };
-
-    /**
-     * @summary Not found page.
-     * @param request   The HTTP request.
-     * @param response  The HTTP response.
-     */
-    public notFound(request: express.Request, response: express.Response): void {
-        const i18n = request.i18n;
-        const model = new ErrorResponseModel(i18n.t("error.notFound"));
-        response.status(404).json(model);
-    };
+function _setUID() {
+    if (process.setuid) {
+        const uid = <number> nconf.get("express:uid");
+        if (uid) {
+            process.setuid(uid);
+            bunyan.info(`Server's UID is now ${process.getuid() }.`);
+        }
+    }
 }
 
-export default IndexController;
+/**
+ * @summary Initializes the express startup.
+ * @param {Express} app The express application.
+ */
+export default function initialize(app: express.Express) {
+    const port = <number> nconf.get("server:listen");
+
+    return app.listen(port, () => {
+         bunyan.info(`Started Express server listening on port ${port} in ${app.settings.env} mode.`);
+         _setUID();
+    });
+}

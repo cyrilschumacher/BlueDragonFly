@@ -28,13 +28,13 @@ import * as express from "express";
 import * as compression from "compression";
 
 /**
- * @summary Initializes "compression" module.
+ * @summary Initializes "compression" handler.
  * @param {Express} app The express application.
  */
 export function initialize(app: express.Express) {
-    bunyan.info("Initializes 'compression' module.");
+    bunyan.info("Initializes 'compression' handler.");
 
-    const options = <Object> nconf.get("compression");
+    const options = <Object> nconf.get("handler:compression");
     const requestHandler = compression(options);
     app.use(requestHandler);
 }

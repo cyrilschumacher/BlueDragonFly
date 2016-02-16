@@ -30,6 +30,7 @@ import * as path from "path";
 
 import nconf from "../configuration/nconf";
 import FileDatabaseService from "../service/fileDatabase";
+import ErrorResponseModel from "../model/response/error";
 
 /**
  * @summary Controller for mail.
@@ -45,10 +46,13 @@ class ResumeController {
     /**
      * @summary Constructor.
      * @constructor
+     * @param {FileDatabaseService} fileDatabaseService The file database service.
      */
-    public constructor() {
-        const databaseDir = <string> nconf.get("resume:path");
-        this._fileDatabaseService = new FileDatabaseService(databaseDir, fs, path);
+    public constructor(fileDatabaseService?: FileDatabaseService) {
+        if (!fileDatabaseService) {
+            const databaseDir = <string> nconf.get("resume:path");
+            this._fileDatabaseService = new FileDatabaseService(databaseDir, fs, path);
+        }
     }
 
     /**
@@ -57,11 +61,12 @@ class ResumeController {
      * @param {Response}  response  The HTTP response.
      */
     public getEducationSection = (request: express.Request, response: express.Response): void => {
+        const i18n = request.i18n;
         const tableName = <string> nconf.get("resume:table:education");
         this._fileDatabaseService.getRowsAsync(tableName, (error, files) => {
             if (error) {
-                const body = util.inspect(error);
-                response.status(500).json(body);
+                const model = new ErrorResponseModel(i18n.t("error.noResumeSection"));
+                response.status(500).json(model);
             } else {
                 response.json(files);
             }
@@ -74,11 +79,12 @@ class ResumeController {
      * @param {Response}  response  The HTTP response.
      */
     public getExperienceSection = (request: express.Request, response: express.Response): void => {
+        const i18n = request.i18n;
         const tableName = <string> nconf.get("resume:table:experience");
         this._fileDatabaseService.getRowsAsync(tableName, (error, files) => {
             if (error) {
-                const body = util.inspect(error);
-                response.status(500).json(body);
+                const model = new ErrorResponseModel(i18n.t("error.noResumeSection"));
+                response.status(500).json(model);
             } else {
                 response.json(files);
             }
@@ -91,11 +97,12 @@ class ResumeController {
      * @param {Response}  response  The HTTP response.
      */
     public getSkillsSection = (request: express.Request, response: express.Response): void => {
+        const i18n = request.i18n;
         const tableName = <string> nconf.get("resume:table:skills");
         this._fileDatabaseService.getRowsAsync(tableName, (error, files) => {
             if (error) {
-                const body = util.inspect(error);
-                response.status(500).json(body);
+                const model = new ErrorResponseModel(i18n.t("error.noResumeSection"));
+                response.status(500).json(model);
             } else {
                 response.json(files);
             }

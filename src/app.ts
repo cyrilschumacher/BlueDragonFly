@@ -23,14 +23,35 @@
 
 /// <reference path="../typings/tsd.d.ts"/>
 
+import * as bodyParser from "body-parser";
 import * as express from "express";
 import * as helmet from "helmet";
-import * as bodyParser from "body-parser";
+import * as path from "path";
 import nconf from "./configuration/nconf";
 
 import expressValidator = require("express-validator");
 
-"use strict";
+/**
+ * @summary Initializes module.
+ * @param {express} app     The application.
+ * @param {string}  path    The path.
+ */
+function initializeModule(app: express.Express, path: string): void {
+    require(path).initialize(app);
+}
+
+/**
+ * @summary Initializes many modules.
+ * @param {express} app     The application.
+ * @param {Array}   paths   The paths.
+ */
+function initializeModules(app: express.Express, paths: Array<string>): void {
+    "use strict";
+
+    for (let path of paths) {
+        initializeModule(app, path);
+    }
+}
 
 // Creates express application.
 const app = express();
@@ -41,26 +62,23 @@ app.use(bodyParser.json());
 app.use(expressValidator());
 app.use(helmet());
 
-// Initializes 'timeout' module.
-import timeout = require("./configuration/handler/timeout");
-timeout.initialize(app);
+// Initializes handlers.
+const handlersPaths = [
+    "./configuration/handler/compression",
+    "./configuration/handler/cors",
+    "./configuration/handler/environment",
+    "./configuration/handler/i18next",
+    "./configuration/handler/timeout"
+];
+initializeModules(app, handlersPaths);
 
-// Initializes 'compresion' module.
-import compresion = require("./configuration/handler/compression");
-compresion.initialize(app);
+// Initializes settings.
+const settingsPaths = ["./configuration/settings/view"];
+initializeModules(app, settingsPaths);
 
-// Initializes environment.
-import environment = require("./configuration/handler/environment");
-environment.initialize(app);
+// Initializes route and startup.
+import route from "./configuration/application/route";
+route(app);
 
-// Initializes localization.
-import i18next = require("./configuration/handler/i18next");
-i18next.initialize(app);
-
-// Initializes routes.
-import route = require("./configuration/route");
-route.initialize(app);
-
-// Initializes startup.
-import startup = require("./configuration/startup");
-export = startup.initialize(app);
+import startup from "./configuration/application/startup";
+startup(app);

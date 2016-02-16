@@ -27,13 +27,13 @@ import * as cors from "cors";
 import * as express from "express";
 
 /**
- * @summary Initializes "cors" module.
+ * @summary Initializes "cors" handler.
  * @param {Express} app The express application.
  */
 export function initialize(app: express.Express) {
-    bunyan.info("Initializes CORS.");
+    bunyan.info("Initializes 'cors' handler.");
 
-    const options = nconf.get("cors");
+    const options = nconf.get("handler:cors");
     const requestHandler = cors(options);
     app.use(requestHandler);
 }
