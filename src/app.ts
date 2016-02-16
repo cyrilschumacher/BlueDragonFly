@@ -26,7 +26,10 @@
 import * as express from "express";
 import * as helmet from "helmet";
 import * as path from "path";
+
 import nconf from "./configuration/nconf";
+import route from "./configuration/application/route";
+import startup from "./configuration/application/startup";
 
 import expressValidator = require("express-validator");
 
@@ -75,8 +78,5 @@ const settingsPaths = ["./configuration/settings/view"];
 initializeModules(app, settingsPaths);
 
 // Initializes route and startup.
-import route from "./configuration/application/route";
 route(app);
-
-import startup from "./configuration/application/startup";
-startup(app);
+export = startup(app);

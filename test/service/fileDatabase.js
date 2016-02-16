@@ -10,10 +10,10 @@ var FileDatabaseService = require('../../dist/service/fileDatabase');
 
 describe('FileDatabaseService', function() {
     // Global variables.
-    var fileDatabase = new FileDatabaseService.default('test/resources/database/', fs, path);
+    var fileDatabase = new FileDatabaseService.default('test/resource/database/', fs, path);
 
     it('should return a error', function(done) {
-        fileDatabase.getRows('notfound', function(error, files) {
+        fileDatabase.getRowsAsync('notfound', function(error, files) {
             assert.isNotNull(error);
             assert.isUndefined(files);
 
@@ -22,7 +22,7 @@ describe('FileDatabaseService', function() {
     });
 
     it('should return files', function(done) {
-        fileDatabase.getRows('table', function(error, files) {
+        fileDatabase.getRowsAsync('table', function(error, files) {
             assert.isNull(error);
             assert.isNotNull(files);
             assert.equal(files.length, 2);
@@ -32,7 +32,7 @@ describe('FileDatabaseService', function() {
     });
 
     it('should return a error instead files', function(done) {
-        fileDatabase.getRows('notFound', function(error, files) {
+        fileDatabase.getRowsAsync('notFound', function(error, files) {
             assert.isNotNull(error);
             assert.isUndefined(files);
 
@@ -41,7 +41,7 @@ describe('FileDatabaseService', function() {
     });
 
     it('should return a file with specific content', function(done) {
-        fileDatabase.getRow('table', 'first.json', function(error, file) {
+        fileDatabase.getRowAsync('table', 'first.json', function(error, file) {
             assert.isNull(error);
             assert.isNotNull(file);
 
@@ -53,7 +53,7 @@ describe('FileDatabaseService', function() {
     });
 
     it('should return a error instead file', function(done) {
-        fileDatabase.getRow('table', 'notFound.json', function(error, file) {
+        fileDatabase.getRowAsync('table', 'notFound.json', function(error, file) {
             assert.isNotNull(error);
             assert.isUndefined(file);
 

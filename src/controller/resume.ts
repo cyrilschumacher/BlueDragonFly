@@ -35,18 +35,13 @@ import ErrorResponseModel from "../model/response/error";
  */
 class ResumeController {
     /**
-     * @summary Service for manage File database.
-     * @type {FileDatabaseService}
-     */
-    private _fileDatabaseService: FileDatabaseService;
-
-    /**
      * @summary Constructor.
      * @constructor
-     * @param {FileDatabaseService} fileDatabaseService The file database service.
+     * @param {FileDatabaseService} _fileDatabaseService The file database service.
+     * @param {any}                 _nconf               The configuration.
      */
-    public constructor(fileDatabaseService?: FileDatabaseService) {
-        if (!fileDatabaseService) {
+    public constructor(private _fileDatabaseService?: FileDatabaseService) {
+        if (!this._fileDatabaseService) {
             const databaseDir = <string> nconf.get("resume:path");
             this._fileDatabaseService = new FileDatabaseService(databaseDir);
         }

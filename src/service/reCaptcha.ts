@@ -35,14 +35,20 @@ type VerifyCallback = (success: boolean) => void;
  */
 class ReCaptchaService {
     /**
+     * @summary Data.
+     * @private
+     * @type {string}
+     */
+    private _data: string;
+
+    /**
      * @summary Fires when there will be no more data to read.
      * @private
-     * @param {string}   data        The data.
      * @param {Function} callback    The callback.
      */
-    private _onEnded = (data: string, callback: VerifyCallback): void => {
+    private _onEnded = (callback: VerifyCallback): void => {
         try {
-            const parsedData = JSON.parse(data);
+            const parsedData = JSON.parse(this._data);
             callback(parsedData.success);
         } catch (e) {
             callback(false);
@@ -53,11 +59,10 @@ class ReCaptchaService {
     * @summary Fires when data is available.
     * @private
     * @param {Buffer}   chunk   The chunk of data.
-    * @param {string}   data    The data.
      *
      */
-    private _onReaded = (chunk: Buffer, data: string): void => {
-        data += chunk.toString();
+    private _onReaded = (chunk: Buffer): void => {
+        this._data += chunk.toString();
     }
 
     /**
@@ -67,10 +72,10 @@ class ReCaptchaService {
      * @param {Function}    callback    The callback.
      */
     private _verify = (response: http.IncomingMessage, callback: VerifyCallback): void => {
-        let data = "";
+        this._data = "";
 
-        response.on("data", (chunk: Buffer) => this._onReaded(chunk, data));
-        response.on("end", () => this._onEnded(data, callback));
+        response.on("data", (chunk: Buffer) => this._onReaded(chunk));
+        response.on("end", () => this._onEnded(callback));
     };
 
     /**

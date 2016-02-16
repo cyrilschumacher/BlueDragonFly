@@ -1,15 +1,27 @@
 'use strict';
 
-/* Dependencies */
-var app = require('../../dist/app');
+var nconf = require('../../dist/configuration/nconf');
 var request = require('supertest');
 var assert = require('chai').assert;
 
 describe('ResumeController', function() {
+    this.timeout(5000);
+
+    // Global variables.
+    var app;
+
     /**
-     * @summary Runs after all tests.
+     * @summary Runs before all test.
      */
-    afterEach(function() {
+    before(function() {
+        nconf.default.set('resume:path', './test/resource/resume');
+        app = require('../../dist/app');
+    });
+
+    /**
+     * @summary Runs after all test.
+     */
+    after(function() {
         app.close();
     });
 

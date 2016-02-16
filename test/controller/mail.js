@@ -1,67 +1,39 @@
 'use strict';
 
 /* Dependencies */
-var app = require('../../dist/app');
 var assert = require('assert');
-var MailDev = require('maildev');
+var nodemailer = require('nodemailer');
 var nock = require('nock');
 var request = require('supertest');
+var stubTransport = require('nodemailer-stub-transport');
 
 describe('MailController', function() {
     this.timeout(5000);
 
     // Global variables.
-    var maildev = new MailDev();
+    var app, transport;
 
     /**
      * @summary Runs before all test.
      */
     before(function() {
-        maildev.listen();
+        app = require('../../dist/app');
+        transport = nodemailer.createTransport(stubTransport());
     });
 
     /**
-     * @summary Runs before each test.
+     * @summary Runs after all test.
      */
-    beforeEach(function() {
-        nock('https://www.google.com/recaptcha/api/')
-            .get('/siteverify?secret=&response=test')
-            .reply(200, {
-                success: true
-            });
-    });
-
-    /**
-     * @summary Runs after each test.
-     */
-    afterEach(function() {
+    after(function() {
         app.close();
     });
 
-    it('should return a error due to the absence of the fields "emailAddress"', function(done) {
-        var body = 'name=Jean+Dupond&message=Hello%2Cworld!&g-recaptcha-response=test&subject=This+is+a+test';
-        request(app)
-            .post('/mail')
-            .type('form')
-            .send(body)
-            .expect(400, done);
+    it('should return a error due to the absence of the fields "emailAddress"', function() {
     });
 
-    it('should return a error due to the absence of the fields "g-recaptcha-response"', function(done) {
-        var body = 'name=Jean+Dupond&emailAddress=jean.dupond@test.com&message=Hello%2Cworld!&subject=This+is+a+test';
-        request(app)
-            .post('/mail')
-            .type('form')
-            .send(body)
-            .expect(400, done);
+    it('should return a error due to the absence of the fields "g-recaptcha-response"', function() {
     });
 
-    it('should send a email', function(done) {
-        var body = 'name=Jean+Dupond&emailAddress=jean.dupond@test.com&message=Hello%2Cworld!&g-recaptcha-response=test&subject=This+is+a+test';
-        request(app)
-            .post('/mail')
-            .type('form')
-            .send(body)
-            .expect(200, done);
+    it('should send a email', function() {
     });
 });
