@@ -9,7 +9,13 @@
             "maxWait": 900000
         }
     },
-    "handler": {
+    "middleware": {
+        "bodyParser": {
+            "json": {},
+            "urlencoded": {
+                "extended": true
+            }
+        },
         "compression": {},
         "cors": {
             "origin": "*",

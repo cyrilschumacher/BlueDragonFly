@@ -24,6 +24,8 @@
 "use strict";
 
 import * as async from "async";
+import * as fs from "fs";
+import * as path from "path";
 
 /**
  * @summary Service for send a HTML mail.
@@ -37,7 +39,13 @@ class FileDatabaseService {
      * @param {any}     _fileSystem     The file system.
      * @param {any}     _path           The path.
      */
-    public constructor(private _databaseDir: string, private _fileSystem: any, private _path: any) {
+    public constructor(private _databaseDir: string, private _fileSystem?: any, private _path?: any) {
+        if (!this._fileSystem) {
+            this._fileSystem = fs;
+        }
+        if (!this._path) {
+            this._path = path;
+        }
     }
 
     /**

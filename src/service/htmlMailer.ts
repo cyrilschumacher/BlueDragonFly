@@ -25,6 +25,7 @@
 
 import * as EmailTemplates from "email-templates";
 import * as nodemailer from "nodemailer";
+import transport from "../configuration/transport";
 
 /**
  * @summary Service for send a HTML mail.
@@ -40,13 +41,17 @@ class HtmlMailerService {
     /**
      * @summary Constructor.
      * @constructor
-     * @param (Transporter) _transporter        The transporter.
      * @param (string)      _from               The recipient.
-     * @param (string)      templateDirectory   The template directory.
+     * @param (string)      _templateDirectory  The template directory.
+     * @param (Transporter) _transport          The transporter.
      */
-    public constructor(private _transporter: nodemailer.Transporter, private _from: string, templateDirectory: string) {
+    public constructor(private _from: string, private _templateDirectory: string, private _transport?: nodemailer.Transporter) {
         const EmailTemplate = EmailTemplates.EmailTemplate;
-        this._emailTemplate = new EmailTemplate(templateDirectory);
+        this._emailTemplate = new EmailTemplate(this._templateDirectory);
+
+        if (!this._transport) {
+            this._transport = transport;
+        }
     }
 
     /**
@@ -81,7 +86,7 @@ class HtmlMailerService {
                 const html = results.html || "";
                 const options = this._createMailOptions(to, subject, text, html);
 
-                this._transporter.sendMail(options, callback);
+                this._transport.sendMail(options, callback);
             } else {
                 callback(error);
             }

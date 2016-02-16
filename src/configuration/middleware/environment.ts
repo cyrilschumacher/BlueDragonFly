@@ -21,27 +21,39 @@
  * SOFTWARE.
  */
 
-import * as express from "express";
-import * as i18next from "i18next";
-import * as i18nextMiddleware from "i18next-express-middleware";
-import * as FilesystemBackend from "i18next-node-fs-backend";
-import * as sprintf from "i18next-sprintf-postprocessor";
+import errorHandler = require("errorhandler");
 
+import * as express from "express";
 import bunyan from "../bunyan";
-import nconf from "../nconf";
 
 /**
- * @summary Initializes "i18next" handler.
+ * @summary Initializes production environment.
+ * @param {Express} app The express application.
+ */
+function _initializeProductionEnvironment(app: express.Express) {
+    app.use(errorHandler());
+}
+
+/**
+ * @summary Initializes development environment.
+ * @param {Express} app The express application.
+ */
+function _initializeDevelopmentEnvironment(app: express.Express) {
+    const options = { log: true };
+    app.use(errorHandler(options));
+}
+
+/**
+ * @summary Initializes "errorHandler" middleware.
  * @param {Express} app The express application.
  */
 export function initialize(app: express.Express) {
-    bunyan.info("Initializes 'i18next' handler.");
+    bunyan.info("Initializes 'errorHandler' middleware.");
 
-    const options = nconf.get("handler:i18next");
-    i18next.use(i18nextMiddleware.LanguageDetector)
-        .use(FilesystemBackend)
-        .use(sprintf)
-        .init(options);
-
-    app.use(i18nextMiddleware.handle(i18next));
+    const env = process.env.NODE_ENV || "development";
+    if (env === "production") {
+        _initializeProductionEnvironment(app);
+    } else {
+        _initializeDevelopmentEnvironment(app);
+    }
 }

@@ -23,7 +23,6 @@
 
 /// <reference path="../typings/tsd.d.ts"/>
 
-import * as bodyParser from "body-parser";
 import * as express from "express";
 import * as helmet from "helmet";
 import * as path from "path";
@@ -56,21 +55,20 @@ function initializeModules(app: express.Express, paths: Array<string>): void {
 // Creates express application.
 const app = express();
 
-// Configures express application.
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+// Configures express middlewares.
 app.use(expressValidator());
 app.use(helmet());
 
-// Initializes handlers.
-const handlersPaths = [
-    "./configuration/handler/compression",
-    "./configuration/handler/cors",
-    "./configuration/handler/environment",
-    "./configuration/handler/i18next",
-    "./configuration/handler/timeout"
+// Initializes middlewares.
+const middlewaresPaths = [
+    "./configuration/middleware/bodyParser",
+    "./configuration/middleware/compression",
+    "./configuration/middleware/cors",
+    "./configuration/middleware/environment",
+    "./configuration/middleware/i18next",
+    "./configuration/middleware/timeout"
 ];
-initializeModules(app, handlersPaths);
+initializeModules(app, middlewaresPaths);
 
 // Initializes settings.
 const settingsPaths = ["./configuration/settings/view"];

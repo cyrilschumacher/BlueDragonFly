@@ -24,9 +24,6 @@
 "use strict";
 
 import * as express from "express";
-import * as fs from "fs";
-import * as util from "util";
-import * as path from "path";
 
 import nconf from "../configuration/nconf";
 import FileDatabaseService from "../service/fileDatabase";
@@ -51,7 +48,7 @@ class ResumeController {
     public constructor(fileDatabaseService?: FileDatabaseService) {
         if (!fileDatabaseService) {
             const databaseDir = <string> nconf.get("resume:path");
-            this._fileDatabaseService = new FileDatabaseService(databaseDir, fs, path);
+            this._fileDatabaseService = new FileDatabaseService(databaseDir);
         }
     }
 

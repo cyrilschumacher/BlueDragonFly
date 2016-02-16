@@ -28,7 +28,6 @@ import * as util from "util";
 
 import bunyan from "../configuration/bunyan";
 import nconf from "../configuration/nconf";
-import transport from "../configuration/transport";
 
 import ErrorResponseModel from "../model/response/error";
 import HtmlMailerService from "../service/htmlMailer";
@@ -63,7 +62,7 @@ class MailController {
         } else {
             const from = nconf.get("mail:from");
             const templateDir = nconf.get("mail:templateDir");
-            this._htmlMailerService = new HtmlMailerService(transport, from, templateDir);
+            this._htmlMailerService = new HtmlMailerService(from, templateDir);
         }
 
         this._reCaptchaService = new ReCaptchaService();

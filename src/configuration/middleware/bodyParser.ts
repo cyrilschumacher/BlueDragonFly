@@ -21,39 +21,21 @@
  * SOFTWARE.
  */
 
-import errorHandler = require("errorhandler");
+import bunyan from "../bunyan";
+import nconf from "../nconf";
 
 import * as express from "express";
-import bunyan from "../bunyan";
+import * as bodyParser from "body-parser";
 
 /**
- * @summary Initializes production environment.
- * @param {Express} app The express application.
- */
-function _initializeProductionEnvironment(app: express.Express) {
-    app.use(errorHandler());
-}
-
-/**
- * @summary Initializes development environment.
- * @param {Express} app The express application.
- */
-function _initializeDevelopmentEnvironment(app: express.Express) {
-    const options = { log: true };
-    app.use(errorHandler(options));
-}
-
-/**
- * @summary Initializes "errorHandler" handler.
+ * @summary Initializes "body-parser" middleware.
  * @param {Express} app The express application.
  */
 export function initialize(app: express.Express) {
-    bunyan.info("Initializes 'errorHandler' handler.");
+    bunyan.info("Initializes 'body-parser' middleware.");
 
-    const env = process.env.NODE_ENV || "development";
-    if (env === "production") {
-        _initializeProductionEnvironment(app);
-    } else {
-        _initializeDevelopmentEnvironment(app);
-    }
+    const urlencodedOptions = <Object> nconf.get("middleware:bodyParser:urlencoded");
+    const jsonOptions = <Object> nconf.get("middleware:bodyParser:json");
+    app.use(bodyParser.urlencoded(urlencodedOptions));
+    app.use(bodyParser.json(jsonOptions));
 }
