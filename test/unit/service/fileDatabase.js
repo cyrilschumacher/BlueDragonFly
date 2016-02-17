@@ -6,11 +6,11 @@ var fs = require("fs");
 var nock = require('nock');
 var path = require("path");
 var request = require('supertest');
-var FileDatabaseService = require('../../dist/service/fileDatabase');
+var FileDatabaseService = require('../../../dist/service/fileDatabase');
 
 describe('FileDatabaseService', function() {
     // Global variables.
-    var fileDatabase = new FileDatabaseService.default('test/resource/database/', fs, path);
+    var fileDatabase = new FileDatabaseService.default('./test/fixture/database/', fs, path);
 
     it('should return a error', function(done) {
         fileDatabase.getRowsAsync('notfound', function(error, files) {

@@ -3,6 +3,7 @@
 /* Dependencies */
 var assert = require('assert');
 var nodemailer = require('nodemailer');
+var nconf = require('../../../dist/configuration/nconf');
 var nock = require('nock');
 var request = require('supertest');
 var stubTransport = require('nodemailer-stub-transport');
@@ -17,7 +18,8 @@ describe('MailController', function() {
      * @summary Runs before all test.
      */
     before(function() {
-        app = require('../../dist/app');
+        nconf.default.file('./test/configuration.json');
+        app = require('../../../dist/app');
         transport = nodemailer.createTransport(stubTransport());
     });
 

@@ -1,6 +1,6 @@
 'use strict';
 
-var nconf = require('../../dist/configuration/nconf');
+var nconf = require('../../../dist/configuration/nconf');
 var request = require('supertest');
 var assert = require('chai').assert;
 
@@ -14,8 +14,8 @@ describe('ResumeController', function() {
      * @summary Runs before all test.
      */
     before(function() {
-        nconf.default.set('resume:path', './test/resource/resume');
-        app = require('../../dist/app');
+        nconf.default.file('./test/configuration.json');
+        app = require('../../../dist/app');
     });
 
     /**
@@ -26,9 +26,11 @@ describe('ResumeController', function() {
     });
 
     it('should return education section', function(done) {
+        var expected = [{'key1':'value1'}, {'key2': 'value2'}];
         request(app)
             .get('/resume/education')
             .expect('Content-Type', /json/)
-            .expect(200, done);
+            .expect(200)
+            .expect(expected, done);
     });
 });

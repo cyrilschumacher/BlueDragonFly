@@ -4,7 +4,7 @@ var nodemailer = require('nodemailer');
 var request = require('supertest');
 var stubTransport = require('nodemailer-stub-transport');
 
-var HtmlMailerService = require('../../dist/service/htmlMailer');
+var HtmlMailerService = require('../../../dist/service/htmlMailer');
 
 /* Global variables */
 var htmlMailer = new HtmlMailerService.default();
@@ -22,7 +22,7 @@ describe('HtmlMailerService', function() {
 
     it('should send a email', function(done) {
         var from = 'admin@test.com';
-        var templateDir = './test/resource/template/mail/';
+        var templateDir = './test/fixture/template/mail/';
         var htmlMailer = new HtmlMailerService.default(from, templateDir, transport);
 
         htmlMailer.sendAsync('jean.dupond@test.com', 'Subject', {}, function(errors) {

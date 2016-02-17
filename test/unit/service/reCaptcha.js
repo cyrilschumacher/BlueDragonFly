@@ -4,7 +4,7 @@
 var assert = require('chai').assert;
 var nock = require('nock');
 var request = require('supertest');
-var ReCaptchaService = require('../../dist/service/reCaptcha');
+var ReCaptchaService = require('../../../dist/service/reCaptcha');
 
 describe('ReCaptchaService', function() {
     // Global variables.

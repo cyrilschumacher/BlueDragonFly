@@ -24,5 +24,5 @@
 import * as bunyan from "bunyan";
 import nconf from "./nconf";
 
-const options = nconf.get("bunyan");
+const options = <bunyan.LoggerOptions> nconf.get("bunyan");
 export default bunyan.createLogger(options);

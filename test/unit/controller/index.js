@@ -1,6 +1,6 @@
 'use strict';
 
-var nconf = require('../../dist/configuration/nconf');
+var nconf = require('../../../dist/configuration/nconf');
 var request = require('supertest');
 
 describe('IndexController', function() {
@@ -13,8 +13,8 @@ describe('IndexController', function() {
      * @summary Runs before all test.
      */
     before(function() {
-        nconf.default.set('settings:view:path', './test/resource/view');
-        app = require('../../dist/app');
+        nconf.default.file('./test/configuration.json');
+        app = require('../../..//dist/app');
     });
 
     /**

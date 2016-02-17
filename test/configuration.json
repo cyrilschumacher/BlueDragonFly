@@ -1,0 +1,71 @@
+{
+    "bunyan": {
+        "name": "Blue DragonFly Test"
+    },
+    "expressBrute": {
+        "options": {
+            "freeRetries": 3,
+            "minWait": 1,
+            "maxWait": 1
+        }
+    },
+    "middleware": {
+        "bodyParser": {
+            "urlencoded": {
+                "extended": true
+            }
+        },
+        "cors": {
+            "origin": "*",
+            "methods": "GET,POST"
+        },
+        "i18next": {
+            "debug": false,
+            "dynamicLoad": true,
+            "fallbackLng": "en",
+            "backend": {
+                "loadPath": ".test/fixture/locale/{{ns}}-{{lng}}.json"
+            }
+        },
+        "timeout": {
+            "time": "10s",
+            "options": {}
+        }
+    },
+    "mail": {
+        "templateDir": "./test/resource/template/mail/",
+        "from": "admin@test.com"
+    },
+    "memcachedstore": {
+        "host": "127.0.0.1"
+    },
+    "nodemailer": {
+        "ignoreTLS": true,
+        "port": 1025
+    },
+    "reCaptcha": {
+        "secret": ""
+    },
+    "resume": {
+        "path": "./test/fixture/resume/",
+        "table": {
+            "education": "education",
+            "experience": "experience",
+            "skills": "skills"
+        }
+    },
+    "server": {
+        "listen": 3005,
+        "uid": 0,
+        "ssl": {
+            "cert": "./test/fixture/ssl/localhost.crt",
+            "key": "./test/fixture/ssl/localhost.key"
+        }
+    },
+    "settings": {
+        "view": {
+            "engine": "jade",
+            "path": "./test/fixture/view/"
+        }
+    }
+}
