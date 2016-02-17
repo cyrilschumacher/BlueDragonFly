@@ -5,8 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "node cluster.js",
-    "test": "mocha ./test/**/*.js",
-    "coverage": "istanbul cover _mocha -- -R spec ./test/**/*Spec.js"
+    "test": "mocha ./test/unit/**/*.js",
+    "coverage": "istanbul cover _mocha -- -R spec ./test/unit/**/*.js"
   },
   "author": "Cyril Schumacher",
   "license": "MIT",
