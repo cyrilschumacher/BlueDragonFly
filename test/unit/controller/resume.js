@@ -5,8 +5,6 @@ var request = require('supertest');
 var assert = require('chai').assert;
 
 describe('ResumeController', function() {
-    this.timeout(5000);
-
     // Global variables.
     var app;
 
@@ -34,6 +32,15 @@ describe('ResumeController', function() {
             .expect(expected, done);
     });
 
+    it('should an error for education section', function(done) {
+        nconf.default.set('resume:table:education', '/foo');
+
+        request(app)
+            .get('/resume/education')
+            .expect('Content-Type', /json/)
+            .expect(500, done);
+    });
+
     it('should return experience section', function(done) {
         var expected = [{'key1':'value1'}, {'key2': 'value2'}];
         request(app)
@@ -43,6 +50,15 @@ describe('ResumeController', function() {
             .expect(expected, done);
     });
 
+    it('should an error for experience section', function(done) {
+        nconf.default.set('resume:table:experience', '/foo');
+
+        request(app)
+            .get('/resume/experience')
+            .expect('Content-Type', /json/)
+            .expect(500, done);
+    });
+
     it('should return skills section', function(done) {
         var expected = [{'key1':'value1'}, {'key2': 'value2'}];
         request(app)
@@ -50,5 +66,14 @@ describe('ResumeController', function() {
             .expect('Content-Type', /json/)
             .expect(200)
             .expect(expected, done);
+    });
+
+    it('should an error for skills section', function(done) {
+        nconf.default.set('resume:table:skills', '/foo');
+
+        request(app)
+            .get('/resume/skills')
+            .expect('Content-Type', /json/)
+            .expect(500, done);
     });
 });

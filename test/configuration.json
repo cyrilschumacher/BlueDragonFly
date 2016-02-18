@@ -33,7 +33,7 @@
         }
     },
     "mail": {
-        "templateDir": "./test/resource/template/mail/",
+        "templateDir": "./test/fixture/template/mail/",
         "from": "admin@test.com"
     },
     "memcachedstore": {

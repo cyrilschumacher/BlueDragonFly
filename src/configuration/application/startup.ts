@@ -32,7 +32,7 @@ import nconf from "../nconf";
 function _setUID() {
     if (process.setuid) {
         const uid = <number> nconf.get("express:uid");
-        if (uid) {
+        if (uid && process.setuid) {
             process.setuid(uid);
             bunyan.info(`Server's UID is now ${process.getuid() }.`);
         }

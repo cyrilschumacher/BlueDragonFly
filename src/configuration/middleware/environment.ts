@@ -27,14 +27,6 @@ import * as express from "express";
 import bunyan from "../bunyan";
 
 /**
- * @summary Initializes production environment.
- * @param {Express} app The express application.
- */
-function _initializeProductionEnvironment(app: express.Express) {
-    app.use(errorHandler());
-}
-
-/**
  * @summary Initializes development environment.
  * @param {Express} app The express application.
  */
@@ -51,9 +43,7 @@ export function initialize(app: express.Express) {
     bunyan.info("Initializes 'errorHandler' middleware.");
 
     const env = process.env.NODE_ENV || "development";
-    if (env === "production") {
-        _initializeProductionEnvironment(app);
-    } else {
+    if (env === "development") {
         _initializeDevelopmentEnvironment(app);
     }
 }
