@@ -4,8 +4,6 @@ var nconf = require('../../../dist/configuration/nconf');
 var request = require('supertest');
 
 describe('IndexController', function() {
-    this.timeout(5000);
-
     // Global variables.
     var app;
 
@@ -27,6 +25,7 @@ describe('IndexController', function() {
     it('should return a default page', function(done) {
         request(app)
             .get('/')
+            .expect('Content-Type', /html/)
             .expect(200, done);
     });
 

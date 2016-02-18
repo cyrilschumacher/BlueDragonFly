@@ -33,4 +33,22 @@ describe('ResumeController', function() {
             .expect(200)
             .expect(expected, done);
     });
+
+    it('should return experience section', function(done) {
+        var expected = [{'key1':'value1'}, {'key2': 'value2'}];
+        request(app)
+            .get('/resume/experience')
+            .expect('Content-Type', /json/)
+            .expect(200)
+            .expect(expected, done);
+    });
+
+    it('should return skills section', function(done) {
+        var expected = [{'key1':'value1'}, {'key2': 'value2'}];
+        request(app)
+            .get('/resume/skills')
+            .expect('Content-Type', /json/)
+            .expect(200)
+            .expect(expected, done);
+    });
 });

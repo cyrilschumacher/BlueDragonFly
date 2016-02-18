@@ -42,8 +42,8 @@ class IndexController {
 
     /**
      * @summary Not found page.
-     * @param request   The HTTP request.
-     * @param response  The HTTP response.
+     * @param {Request}     request   The HTTP request.
+     * @param {Response}    response  The HTTP response.
      */
     public notFound(request: express.Request, response: express.Response): void {
         const i18n = request.i18n;

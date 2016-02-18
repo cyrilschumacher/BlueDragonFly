@@ -49,9 +49,9 @@
     "resume": {
         "path": "./test/fixture/resume/",
         "table": {
-            "education": "education",
-            "experience": "experience",
-            "skills": "skills"
+            "education": "",
+            "experience": "",
+            "skills": ""
         }
     },
     "server": {

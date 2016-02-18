@@ -49,6 +49,7 @@ export default function initialize(app: express.Express) {
     const resumeController = new ResumeController();
     app.get("/resume/education", resumeController.getEducationSection);
     app.get("/resume/experience", resumeController.getExperienceSection);
+    app.get("/resume/skills", resumeController.getSkillsSection);
 
     // Works.
     const worksController = new WorksController();
